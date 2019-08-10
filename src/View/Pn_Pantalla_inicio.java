@@ -1,0 +1,338 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package View;
+
+import java.awt.Dimension;
+import java.awt.Image;
+import java.io.File;
+import java.util.Timer;
+import java.util.TimerTask;
+import java.util.concurrent.Executors;
+import java.util.concurrent.ScheduledExecutorService;
+import java.util.concurrent.TimeUnit;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.ImageIcon;
+import javax.swing.text.html.parser.DTDConstants;
+
+/**
+ *
+ * @author RojeruSan
+ */
+public class Pn_Pantalla_inicio extends javax.swing.JPanel {
+  TimerTask task;
+    int position = 0;
+
+    /**
+     * Creates new form pnlHome
+     */
+    public Pn_Pantalla_inicio() {
+        initComponents();
+        repeticiones();
+
+    }
+
+    //INICIA SLIDER AUTOMATICO
+    public boolean previous() {
+        boolean val = true;
+        next.setVisible(true);
+        new Thread();
+        try {
+            Thread.sleep(3000);
+            int p = this.label1.getX();
+
+            if (p > -1) {
+                Animacion.Animacion.mover_izquierda(0, 1110, 1, 2, label1);
+            }
+            position = position - 1;
+            if (position < 0) {
+                position = 0;
+                previous.setVisible(false);
+                val = false;
+            }
+            show(position);
+        } catch (InterruptedException ex) {
+            Logger.getLogger(Pn_Pantalla_inicio.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return val;
+    }
+
+    public boolean next() {
+        boolean val = true;
+        previous.setVisible(true);
+
+        new Thread();
+        try {
+            Thread.sleep(3000);
+            int p = this.label1.getX();
+
+            if (p > -1) {
+
+                Animacion.Animacion.mover_izquierda(0, 1110, 1, 2, label1);
+            }
+            position = position + 1;
+            if (position >= takeimage().length) {
+                position = takeimage().length - 1;
+                next.setVisible(false);
+                val = false;
+            }
+            show(position);
+        } catch (InterruptedException ex) {
+            Logger.getLogger(Pn_Pantalla_inicio.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return val;
+    }
+
+    public void repeticiones() {
+       /* final Runnable tarea = new Runnable() {
+            public void run() {
+                if (previous() == true) {
+                    previous();
+                } else {
+                    next();
+                }
+                if (next() == true) {
+                    next();
+                } else {
+                    previous();
+                }
+            }
+        };
+        ScheduledExecutorService timer = Executors.newSingleThreadScheduledExecutor();
+        timer.scheduleAtFixedRate(tarea, 1, 1, TimeUnit.SECONDS);*/
+       Timer timer = null;
+  
+        task = new TimerTask() {
+            @Override
+            public void run() {
+              if (previous() == true) {
+                    previous();
+                } else {
+                    next();
+                }
+                if (next() == true) {
+                    next();
+                } else {
+                    previous();
+                }  
+            }
+        };
+        timer = new java.util.Timer();
+        timer.schedule(task, 0, 7000);
+       
+    }
+//TERMINA SLIDER AUTOMATICO
+
+    /**X
+     * ***************************INICIA NECESARIO PARA EXTRAER Y CONSTRUIR EL
+     * SLIDER
+     */
+    public String[] takeimage() {
+        File f = new File(getClass().getResource("../Imagenes/ImagesSlider").getFile());
+       // System.err.println(f);
+        String[] Images = f.list();
+        return Images;
+    }
+//meto que muestra la imagen por su numero de indez y que la escala al tamaño del jlabel que la contenga
+
+    public void show(int index) {
+        String[] Images = takeimage();
+        String img = Images[index];
+     
+        //se utiliza para obtener la ruta de la imagen 
+        ImageIcon icon = new ImageIcon(getClass().getResource("/Imagenes/ImagesSlider/" + img));
+        //se utilizar para obtener el tamaño de jlaben que contendra la imagen y 
+        //despues se reacomda la imagen automaticamente 
+        Image image = icon.getImage().getScaledInstance(label1.getWidth(), label1.getHeight(), Image.SCALE_SMOOTH);
+//AQUI AGREGAMOS LAS IMAGENES AL LABEL COMO ICONO
+        label1.setIcon(new ImageIcon(image));
+    }
+
+    /**
+     * ***********TERMINAN LOS COFIGOS NECESARIOS PARA EL SLIDER (SE DEBE
+     * INCLUIR LOS DEL BOTON BACK Y NEXT)
+     */
+    /**
+     * This method is called from within the constructor to initialize the form.
+     * WARNING: Do NOT modify this code. The content of this method is always
+     * regenerated by the Form Editor.
+     */
+    @SuppressWarnings("unchecked")
+    // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
+    private void initComponents() {
+
+        jPanel1 = new javax.swing.JPanel();
+        jPanel3 = new javax.swing.JPanel();
+        next = new javax.swing.JLabel();
+        previous = new javax.swing.JLabel();
+        label1 = new javax.swing.JLabel();
+        jPanel2 = new javax.swing.JPanel();
+        jLabel1 = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
+        jLabel3 = new javax.swing.JLabel();
+        jLabel5 = new javax.swing.JLabel();
+        jLabel4 = new javax.swing.JLabel();
+
+        setBackground(new java.awt.Color(255, 255, 255));
+        setPreferredSize(new java.awt.Dimension(500, 500));
+        setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jPanel1.setBackground(new java.awt.Color(255, 255, 255));
+
+        jPanel3.setBackground(new java.awt.Color(36, 47, 65));
+        jPanel3.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        next.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/IconsImagesSlider/icons8_Next_page_52px.png"))); // NOI18N
+        next.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        next.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                nextMousePressed(evt);
+            }
+        });
+        jPanel3.add(next, new org.netbeans.lib.awtextra.AbsoluteConstraints(1050, 110, 50, 70));
+
+        previous.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/IconsImagesSlider/icons8_Back_To_64px.png"))); // NOI18N
+        previous.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        previous.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                previousMousePressed(evt);
+            }
+        });
+        jPanel3.add(previous, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 110, 60, 70));
+
+        label1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/IconsImagesSlider/IMAGEN-INICIAL.jpg"))); // NOI18N
+        label1.setPreferredSize(new java.awt.Dimension(1120, 330));
+        jPanel3.add(label1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1120, 320));
+
+        jPanel2.setBackground(new java.awt.Color(36, 47, 65));
+
+        jLabel1.setFont(new java.awt.Font("Roboto", 1, 36)); // NOI18N
+        jLabel1.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel1.setText("AHORA EL CONTROL ESTA ");
+
+        jLabel2.setFont(new java.awt.Font("Roboto", 1, 12)); // NOI18N
+        jLabel2.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel2.setText("Te agradecemos que hayas elegido nuestro sistema ");
+
+        jLabel3.setFont(new java.awt.Font("Roboto", 1, 12)); // NOI18N
+        jLabel3.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel3.setText("Comienza a explorar , las multiples opciones que este sistema ofrece");
+
+        jLabel5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/inicio.png"))); // NOI18N
+
+        jLabel4.setFont(new java.awt.Font("Roboto", 1, 36)); // NOI18N
+        jLabel4.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel4.setText("EN TUS MANOS");
+
+        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
+        jPanel2.setLayout(jPanel2Layout);
+        jPanel2Layout.setHorizontalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addGap(68, 68, 68)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 378, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 504, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel2)
+                    .addComponent(jLabel3))
+                .addGap(33, 33, 33)
+                .addComponent(jLabel5)
+                .addContainerGap(247, Short.MAX_VALUE))
+        );
+        jPanel2Layout.setVerticalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 340, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(26, 26, 26)
+                .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(62, 62, 62)
+                .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(67, 67, 67))
+        );
+
+        jPanel3.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 320, -1, 340));
+
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+        );
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+        );
+
+        add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, 680));
+    }// </editor-fold>//GEN-END:initComponents
+
+    private void previousMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_previousMousePressed
+        next.setVisible(true);
+        new Thread();
+        try {
+            Thread.sleep(300);
+            int p = this.label1.getX();
+
+            if (p > -1) {
+                Animacion.Animacion.mover_izquierda(0, 1110, 1, 2, label1);
+
+            }
+            position = position - 1;
+            if (position < 0) {
+                position = 0;
+                previous.setVisible(false);
+
+            }
+            show(position);
+        } catch (InterruptedException ex) {
+            Logger.getLogger(Pn_Pantalla_inicio.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_previousMousePressed
+
+    private void nextMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_nextMousePressed
+        previous.setVisible(true);
+
+        new Thread();
+        try {
+            Thread.sleep(300);
+            int p = this.label1.getX();
+
+            if (p > -1) {
+
+                Animacion.Animacion.mover_izquierda(0, 1110, 1, 2, label1);
+            }
+            position = position + 1;
+            if (position >= takeimage().length) {
+                position = takeimage().length - 1;
+                next.setVisible(false);
+            }
+
+            show(position);
+
+        } catch (InterruptedException ex) {
+            Logger.getLogger(Pn_Pantalla_inicio.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_nextMousePressed
+
+
+    // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
+    private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanel2;
+    private javax.swing.JPanel jPanel3;
+    private javax.swing.JLabel label1;
+    private javax.swing.JLabel next;
+    private javax.swing.JLabel previous;
+    // End of variables declaration//GEN-END:variables
+}
