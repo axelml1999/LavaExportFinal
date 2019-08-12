@@ -12,8 +12,11 @@ import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.event.KeyEvent;
+import javax.swing.JTable;
+import javax.swing.RowFilter;
 import javax.swing.border.LineBorder;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableRowSorter;
 
 /**
  *
@@ -21,7 +24,7 @@ import javax.swing.table.DefaultTableModel;
  */
 public class Pn_Extras extends javax.swing.JPanel {
 
-  ExtrasController cc = new ExtrasController();
+    ExtrasController ec = new ExtrasController();
     String accion;
     int id;
     String descripcion;
@@ -41,7 +44,7 @@ public class Pn_Extras extends javax.swing.JPanel {
     }
 
     public void cargarTabla() {
-        DefaultTableModel tb = cc.tablaExtras();
+        DefaultTableModel tb = ec.tablaExtras();
         jt_Extras.setModel(tb);
     }
 
@@ -50,8 +53,9 @@ public class Pn_Extras extends javax.swing.JPanel {
         t_extra.setEnabled(false);
         bt_agregar.setEnabled(false);
         bt_cancelar.setEnabled(false);
-        
         bt_eliminar.setEnabled(false);
+        bt_nuevo.setEnabled(true);
+        bt_agregar.setText("Agregar");
 
     }
 
@@ -60,9 +64,17 @@ public class Pn_Extras extends javax.swing.JPanel {
         t_extra.setEnabled(true);
         bt_agregar.setEnabled(true);
         bt_cancelar.setEnabled(true);
-        
         bt_eliminar.setEnabled(true);
+        bt_nuevo.setEnabled(false);
+    }
 
+    public void desbloquear_item() {
+
+        bt_agregar.setEnabled(true);
+        bt_cancelar.setEnabled(true);
+        bt_eliminar.setEnabled(true);
+        bt_nuevo.setEnabled(false);
+        bt_agregar.setText("Actualizar");
     }
 
     public void ComponenteNoEditable() {
@@ -339,6 +351,7 @@ public class Pn_Extras extends javax.swing.JPanel {
                 "Código", "Descripción", "Valor Aproximado"
             }
         ));
+        jt_Extras.getTableHeader().setReorderingAllowed(false);
         jt_Extras.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusGained(java.awt.event.FocusEvent evt) {
                 jt_ExtrasFocusGained(evt);
@@ -371,6 +384,11 @@ public class Pn_Extras extends javax.swing.JPanel {
                 t_empleadoActionPerformed(evt);
             }
         });
+        t_empleado.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                t_empleadoKeyTyped(evt);
+            }
+        });
         add(t_empleado, new org.netbeans.lib.awtextra.AbsoluteConstraints(831, 130, 150, -1));
 
         jSeparator5.setBackground(new java.awt.Color(128, 128, 131));
@@ -379,17 +397,22 @@ public class Pn_Extras extends javax.swing.JPanel {
         jLabel23.setFont(new java.awt.Font("Century Gothic", 1, 14)); // NOI18N
         jLabel23.setForeground(new java.awt.Color(128, 128, 131));
         jLabel23.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-        jLabel23.setText("Buscar Empleado");
+        jLabel23.setText("Buscar Extras");
         add(jLabel23, new org.netbeans.lib.awtextra.AbsoluteConstraints(680, 130, -1, -1));
     }// </editor-fold>//GEN-END:initComponents
 
     private void bt_eliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bt_eliminarActionPerformed
-        // cargarTabla();
-        //limpiarCampos();
+         int filasel = jt_Extras.getSelectedRow();
+        id = Integer.parseInt(jt_Extras.getValueAt(filasel, 0).toString());
+        ec.eliminar(id);
+        cargarTabla();
+        limpiarCampos();
+        bt_eliminar.setText("Eliminar");
+        
     }//GEN-LAST:event_bt_eliminarActionPerformed
 
     private void bt_cancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bt_cancelarActionPerformed
-
+         bloquearComponentes();
         limpiarCampos();
         quitarBordeError();
         limpiarErrores();
@@ -425,16 +448,11 @@ public class Pn_Extras extends javax.swing.JPanel {
 
         } else {
             descripcion = t_extra.getText();
-            cc.guardar(accion, id, descripcion);
+            ec.guardar(accion, id, descripcion);
             cargarTabla();
             lb_errorCampos.setText("");
             limpiarCampos();
             bloquearComponentes();
-
-            lb_errorCampos.setText("");
-            limpiarCampos();
-            bloquearComponentes();
-            bt_nuevo.setEnabled(true);
 
             //PROGRAMADOR AQUÍ ESCRIBE TU CÓDIGO
             //FIN DEL CÓDIGO DEL PROGRAMADOR
@@ -487,25 +505,23 @@ public class Pn_Extras extends javax.swing.JPanel {
     }//GEN-LAST:event_bt_nuevoMouseClicked
 
     private void bt_agregarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_bt_agregarMouseClicked
-       
-// TODO add your handling code here:
 
+// TODO add your handling code here:
 
     }//GEN-LAST:event_bt_agregarMouseClicked
 
     private void bt_eliminarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_bt_eliminarMouseClicked
-        int filasel = jt_Extras.getSelectedRow();
-        id = Integer.parseInt(jt_Extras.getValueAt(filasel, 0).toString());
-        cc.eliminar(id);
+//        int filasel = jt_Extras.getSelectedRow();
+        //      id = Integer.parseInt(jt_Extras.getValueAt(filasel, 0).toString());
+        //    ec.eliminar(id);
 
         // TODO add your handling code here:
-        cargarTabla();
-        limpiarCampos();
+        //  cargarTabla();
+        //limpiarCampos();
         // TODO add your handling code here:
     }//GEN-LAST:event_bt_eliminarMouseClicked
 
     private void jt_ExtrasFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jt_ExtrasFocusGained
-
 
         // TODO add your handling code here:
     }//GEN-LAST:event_jt_ExtrasFocusGained
@@ -532,14 +548,30 @@ public class Pn_Extras extends javax.swing.JPanel {
     }//GEN-LAST:event_t_empleadoActionPerformed
 
     private void jt_ExtrasMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jt_ExtrasMouseClicked
-int filasel = jt_Extras.getSelectedRow();
-        id = Integer.parseInt(jt_Extras.getValueAt(filasel, 0).toString());
-        descripcion = jt_Extras.getValueAt(filasel, 1).toString();
+         // TODO add your handling code here:
+        ComponenteEditable();
+        //desbloquear_item();
+        int filaSel = jt_Extras.getSelectedRow();
+        id = Integer.parseInt(jt_Extras.getValueAt(filaSel, 0).toString());
+        descripcion = jt_Extras.getValueAt(filaSel, 1).toString();
         t_extra.setText(descripcion);
         accion = "M";
         bt_agregar.setText("Modificar");
-        desbloquearComponentes();        // TODO add your handling code here:
+        desbloquearComponentes();
     }//GEN-LAST:event_jt_ExtrasMouseClicked
+
+    private void t_empleadoKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_t_empleadoKeyTyped
+        filtro(t_empleado.getText(), jt_Extras);
+// TODO add your handling code here:
+    }//GEN-LAST:event_t_empleadoKeyTyped
+    DefaultTableModel dm;
+
+    private void filtro(String consulta, JTable jtableBuscar) {
+        dm = (DefaultTableModel) jtableBuscar.getModel();
+        TableRowSorter<DefaultTableModel> tr = new TableRowSorter<>(dm);
+        jtableBuscar.setRowSorter(tr);
+        tr.setRowFilter(RowFilter.regexFilter(consulta));
+    }
 
     public void RowApariencia() {
         jt_Extras.setFocusable(false);
