@@ -52,30 +52,25 @@ public class EmpleadoController extends EmpleadoModel {
     
     public DefaultTableModel tablaEmpleado() {
 
-        String[] titulos = {"Id", "Nombre","Direccion","Sexo","Estatus","CURP","Horario","Cargo","Departamento","Gratificacion","Salario","NSS","RFC","Fecha Nacimiento","Fecha Ingreso"};
+        String[] titulos = {"Id","Departamento","Nombre","Horario","Cargo","Fecha Nacimiento","Fecha Ingreso","Estatus"};
         DefaultTableModel tb = new DefaultTableModel(null, titulos);
-        Object[] fila = new Object[15];
+        Object[] fila = new Object[8];
 
         ResultSet rs = consultarEmpleado();
         try {
             while (rs.next()) {
                 fila[0] = rs.getInt("id_empleado");
-                fila[1] = rs.getString("nombre") + " " + rs.getString("apellido_paterno") + " " + rs.getString("apellido_materno");
-                fila[2] = rs.getString("direccion");
-                fila[3] = consultarSexo(rs.getString("sexo"));
-                fila[4] = consultarEstatus(rs.getString("estatus"));
-                fila[5] = rs.getString("curp");
+                fila[1] = dc.consultarIdDepartamentoController(rs.getString("id_departamento"));
+                fila[2] = rs.getString("nombre") + " " + rs.getString("apellido_paterno") + " " + rs.getString("apellido_materno");
                 
-                fila[6] = hc.consultarIdHorarioController(rs.getString("id_horario"));
-                fila[7] = cc.consultarDescripcionCargoController(rs.getString("id_cargo"));
-                fila[8] = dc.consultarIdDepartamentoController(rs.getString("id_departamento"));
+                
+                fila[3] = hc.consultarIdHorarioController(rs.getString("id_horario"));
+                fila[4] = cc.consultarDescripcionCargoController(rs.getString("id_cargo"));
+                
 
-                fila[9] = rs.getString("gratificacion");
-                fila[10] = rs.getString("salario");
-                fila[11] = rs.getString("num_seg_social");
-                fila[12] = rs.getString("rfc");
-                fila[13] = rs.getString("fecha_nacimiento");
-                fila[14] = rs.getString("fecha_entrada");
+                fila[5] = rs.getString("fecha_nacimiento");
+                fila[6] = rs.getString("fecha_entrada");
+                fila[7] = consultarEstatus(rs.getString("estatus"));
                 tb.addRow(fila);
             }
         } catch (SQLException ex) {

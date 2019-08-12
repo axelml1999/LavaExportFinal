@@ -19,10 +19,10 @@ public class LavaExportS {
     public static void main(String[] args) {
         // TODO code application logic here
        // sesion sn = new sesion();
-        //Principal sn = new Principal();
-
-      // sesion sn = new sesion();
         Principal sn = new Principal();
+
+      //sesion sn = new sesion();
+        //Principal sn = new Principal();
 
         sn.setVisible(true);
     }

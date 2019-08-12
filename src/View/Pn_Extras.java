@@ -16,6 +16,7 @@ import javax.swing.JTable;
 import javax.swing.RowFilter;
 import javax.swing.border.LineBorder;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableColumnModel;
 import javax.swing.table.TableRowSorter;
 
 /**
@@ -40,12 +41,21 @@ public class Pn_Extras extends javax.swing.JPanel {
         bloquearComponentes();
         ComponenteNoEditable();
         cargarTabla();
+        tamañoTabla();
 
     }
 
     public void cargarTabla() {
         DefaultTableModel tb = ec.tablaExtras();
         jt_Extras.setModel(tb);
+        tamañoTabla();
+    }
+    
+     public void tamañoTabla() {
+        TableColumnModel columnModel = jt_Extras.getColumnModel();
+        columnModel.getColumn(0).setPreferredWidth(10);
+        columnModel.getColumn(1).setPreferredWidth(180);
+
     }
 
     public void bloquearComponentes() {
@@ -561,6 +571,13 @@ public class Pn_Extras extends javax.swing.JPanel {
     }//GEN-LAST:event_jt_ExtrasMouseClicked
 
     private void t_empleadoKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_t_empleadoKeyTyped
+        char tecla;
+        tecla = evt.getKeyChar();
+        //Convertir a letras mayusculas
+        if (Character.isLetter(tecla)) {
+            evt.setKeyChar(Character.toUpperCase(tecla));
+
+        }
         filtro(t_empleado.getText(), jt_Extras);
 // TODO add your handling code here:
     }//GEN-LAST:event_t_empleadoKeyTyped

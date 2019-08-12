@@ -15,6 +15,7 @@ import javax.swing.JTable;
 import javax.swing.RowFilter;
 import javax.swing.border.LineBorder;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableColumnModel;
 import javax.swing.table.TableRowSorter;
 
 /**
@@ -39,12 +40,14 @@ public class Pn_Cargo extends javax.swing.JPanel {
         bloquearComponentes();
         ComponenteNoEditable();
         cargarTabla();
+        tamañoTabla();
 
     }
 
     public void cargarTabla() {
         DefaultTableModel tb = cc.tablaCargos();
         jt_cargos.setModel(tb);
+        tamañoTabla();
     }
 
   public void bloquearComponentes() {
@@ -134,6 +137,13 @@ public class Pn_Cargo extends javax.swing.JPanel {
     public void limpiarErrores() {
         lb_errorCampos.setText("");
         lb_errorCargo.setText("");
+
+    }
+    
+     public void tamañoTabla() {
+        TableColumnModel columnModel = jt_cargos.getColumnModel();
+        columnModel.getColumn(0).setPreferredWidth(10);
+        columnModel.getColumn(1).setPreferredWidth(180);
 
     }
 
@@ -305,7 +315,7 @@ public class Pn_Cargo extends javax.swing.JPanel {
         });
         jScrollPane1.setViewportView(jt_cargos);
 
-        add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 160, 520, 90));
+        add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 160, 520, 200));
 
         bt_agregar.setBackground(new java.awt.Color(97, 212, 195));
         bt_agregar.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
@@ -573,6 +583,14 @@ public class Pn_Cargo extends javax.swing.JPanel {
         tr.setRowFilter(RowFilter.regexFilter(consulta));
     }
     private void t_empleadoKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_t_empleadoKeyTyped
+        char tecla;
+        tecla = evt.getKeyChar();
+        //Convertir a letras mayusculas
+        if (Character.isLetter(tecla)) {
+            evt.setKeyChar(Character.toUpperCase(tecla));
+
+        }
+        
         filtro(t_empleado.getText(), jt_cargos);
         // TODO add your handling code here:
     }//GEN-LAST:event_t_empleadoKeyTyped

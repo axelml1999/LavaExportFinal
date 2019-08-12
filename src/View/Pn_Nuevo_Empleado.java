@@ -28,6 +28,7 @@ import javax.swing.JTable;
 import javax.swing.RowFilter;
 import javax.swing.border.LineBorder;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableColumnModel;
 import javax.swing.table.TableRowSorter;
 
 /**
@@ -85,11 +86,23 @@ public class Pn_Nuevo_Empleado  extends javax.swing.JPanel {
         cargarDepartamentos();
         cargarCargos();
         cargarHorarios();
+        tamañoTabla();
 
     }
     
  
-    
+     public void tamañoTabla() {
+        TableColumnModel columnModel = jt_empleados.getColumnModel();
+        columnModel.getColumn(0).setPreferredWidth(50);
+        columnModel.getColumn(1).setPreferredWidth(180);
+        columnModel.getColumn(2).setPreferredWidth(240);
+        columnModel.getColumn(3).setPreferredWidth(180);
+        columnModel.getColumn(4).setPreferredWidth(180);
+        columnModel.getColumn(5).setPreferredWidth(180);
+        columnModel.getColumn(6).setPreferredWidth(180);
+        columnModel.getColumn(7).setPreferredWidth(100);
+
+    }
     
     private void filtro(String consulta, JTable jtableBuscar) {
         dm = (DefaultTableModel) jtableBuscar.getModel();
@@ -116,6 +129,7 @@ public class Pn_Nuevo_Empleado  extends javax.swing.JPanel {
     public void cargarTabla() {
         DefaultTableModel tb = ec.tablaEmpleado();
         jt_empleados.setModel(tb);
+        tamañoTabla();
     }
 
     public void consultarId(String id_empleado) {
@@ -2734,6 +2748,8 @@ char tecla;
         cb_horario.setSelectedIndex(0);
         cb_sexo.setSelectedIndex(0);
         cb_estatus.setSelectedIndex(0);
+        jDateNacimiento.setDate(null);
+        jDateIngreso.setDate(null);
 
     }
 

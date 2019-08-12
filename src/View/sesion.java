@@ -7,7 +7,6 @@
 //this.setExtendedState(dashBoardPrincipal.MAXIMIZED_BOTH);
 package View;
 
-
 import Controller.LoginController;
 import java.awt.Color;
 import javafx.scene.layout.Border;
@@ -21,59 +20,72 @@ import java.util.Date;
 import java.text.SimpleDateFormat;
 import java.util.*;
 import javax.swing.JOptionPane;
+import java.awt.event.KeyEvent;
+import javax.swing.InputMap;
+import javax.swing.KeyStroke;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
 
 /**
  *
  * @author sebastian
  */
 public class sesion extends javax.swing.JFrame implements Runnable {
-    LoginController LC=new LoginController();
+
+    LoginController LC = new LoginController();
     String hora, minutos, segundos;
     Thread hilo;
+
+    InputMap map = new InputMap();
+
+    public void keyPressed(KeyEvent ke) {
+        if (ke.getKeyCode() == KeyEvent.VK_ENTER) {
+            iniciar_sesionActionPerformed(null);
+        }
+    }
 
     /**
      * Creates new form sesion
      */
     public sesion() {
-     
+
         setPantalla();//se debe mandar a llamar primero
         initComponents();
         centrarPantalla();
         mostrarFecha();
         mostrarHora();
-    
- 
 
     }
 
     public void setPantalla() {
-   
+
         //para eliminar el tittle bar
         this.setUndecorated(true);
-          //para que no le cambien el tamaño
+        //para que no le cambien el tamaño
         this.setResizable(false);
-  
+
     }
-    public void centrarPantalla(){
+
+    public void centrarPantalla() {
         //para dejar el menu centrado y estatico
         this.setLocationRelativeTo(null);
     }
-    
-    
-    void Valida(String user,String password){
-        
-        String valor=LC.autenticacion(user, password);
-        
+
+    void Valida(String user, String password) {
+
+        String valor = LC.autenticacion(user, password);
+
         if (valor.equals("V")) {
             dispose();//cerrar un pantalla x
             Principal d = new Principal();
             d.setVisible(true);
-            
-        }else{
+
+        } else {
             JOptionPane.showMessageDialog(null, "Usuario Y/O Contraseña Incorrecto");
             Lb_notificacion.setText("Usuario Y/O Contraseña Incorrecto");
         }
     }
+
     public void hora() {
         Calendar calendario = new GregorianCalendar();
         Date horaactual = new Date();
@@ -81,8 +93,9 @@ public class sesion extends javax.swing.JFrame implements Runnable {
         hora = calendario.get(Calendar.HOUR_OF_DAY) > 9 ? "" + calendario.get(Calendar.HOUR_OF_DAY) : "0" + calendario.get(Calendar.HOUR_OF_DAY);
         minutos = calendario.get(Calendar.MINUTE) > 9 ? "" + calendario.get(Calendar.MINUTE) : "0" + calendario.get(Calendar.MINUTE);
         segundos = calendario.get(Calendar.SECOND) > 9 ? "" + calendario.get(Calendar.SECOND) : "0" + calendario.get(Calendar.SECOND);
-        
+
     }
+
     public void run() {
         // Thread current= Thread.currentThread();
         for (int i = 1; i > 0; i++) {
@@ -92,12 +105,14 @@ public class sesion extends javax.swing.JFrame implements Runnable {
             }
         }
     }
-    public void mostrarFecha(){
-           //componente para fecha
-        lb_fecha.setText(fecha()); 
+
+    public void mostrarFecha() {
+        //componente para fecha
+        lb_fecha.setText(fecha());
     }
-    public void mostrarHora(){
-               //componentes para la hora
+
+    public void mostrarHora() {
+        //componentes para la hora
         hilo = new Thread(this);
         hilo.start();
         setVisible(true);
@@ -235,6 +250,11 @@ public class sesion extends javax.swing.JFrame implements Runnable {
                 contraseñaActionPerformed(evt);
             }
         });
+        contraseña.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                contraseñaKeyTyped(evt);
+            }
+        });
         jPanel2.add(contraseña, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 328, 220, -1));
 
         jSeparator2.setForeground(new java.awt.Color(255, 255, 255));
@@ -279,6 +299,11 @@ public class sesion extends javax.swing.JFrame implements Runnable {
                 iniciar_sesionActionPerformed(evt);
             }
         });
+        iniciar_sesion.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                iniciar_sesionKeyTyped(evt);
+            }
+        });
         jPanel2.add(iniciar_sesion, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 410, 110, 34));
 
         jLabel8.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/iconfinder_icon-114-lock_314481 (1).png"))); // NOI18N
@@ -311,6 +336,7 @@ public class sesion extends javax.swing.JFrame implements Runnable {
 
     private void contraseñaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_contraseñaActionPerformed
         // TODO add your handling code here:
+
     }//GEN-LAST:event_contraseñaActionPerformed
 
     private void formMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_formMouseClicked
@@ -324,7 +350,7 @@ public class sesion extends javax.swing.JFrame implements Runnable {
         if (usuario.getText().trim().equals("") || usuario.getText().trim().toLowerCase().equals("Ingresa tu usuario")) {
             usuario.setText("Ingresa tu usuario");
             usuario.setForeground(new Color(153, 153, 153));
-            
+
         }
 
         // TODO add your handling code here:
@@ -335,7 +361,7 @@ public class sesion extends javax.swing.JFrame implements Runnable {
         if (password.trim().equals("") || password.trim().toLowerCase().equals("password")) {
             contraseña.setText("Ingresa tu usuario");
             contraseña.setForeground(new Color(153, 153, 153));
-            
+
         }
 
         // TODO add your handling code here:
@@ -346,24 +372,32 @@ public class sesion extends javax.swing.JFrame implements Runnable {
     }//GEN-LAST:event_cerrar_sesionMouseClicked
 
     private void iniciar_sesionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_iniciar_sesionActionPerformed
-       
+
         String password = String.valueOf(contraseña.getPassword());
         String user = usuario.getText();
-        if(!usuario.getText().equals("Ingresa tu usuario")&& !password.equals("password")){
-        this.Valida(user, password);
-        }else {
-        JOptionPane.showMessageDialog(null,"Debes ingresar usuario y contraseña");
+        if (!usuario.getText().equals("Ingresa tu usuario") && !password.equals("password")) {
+            this.Valida(user, password);
+        } else {
+            JOptionPane.showMessageDialog(null, "Debes ingresar usuario y contraseña");
             Lb_notificacion.setText("Debes ingresar usuario y contraseña");
         }
-        
-        
-        
-        
+
+
     }//GEN-LAST:event_iniciar_sesionActionPerformed
 
     private void iniciar_sesionMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_iniciar_sesionMouseClicked
-     
+
     }//GEN-LAST:event_iniciar_sesionMouseClicked
+
+    private void iniciar_sesionKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_iniciar_sesionKeyTyped
+        // TODO add your handling code here:
+      
+
+    }//GEN-LAST:event_iniciar_sesionKeyTyped
+
+    private void contraseñaKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_contraseñaKeyTyped
+        // TODO add your handling code here:
+    }//GEN-LAST:event_contraseñaKeyTyped
 
     /**
      * @param args the command line arguments
@@ -403,7 +437,7 @@ public class sesion extends javax.swing.JFrame implements Runnable {
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 new sesion().setVisible(true);
-                
+
             }
         });
     }

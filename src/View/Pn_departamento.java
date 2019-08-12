@@ -15,6 +15,7 @@ import javax.swing.JTable;
 import javax.swing.RowFilter;
 import javax.swing.border.LineBorder;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableColumnModel;
 import javax.swing.table.TableRowSorter;
 
 /**
@@ -42,6 +43,7 @@ public class Pn_departamento extends javax.swing.JPanel {
         ComponenteNoEditable();
         cbIndexInicial();
         cargarTabla();
+        tamañoTabla();
 
     }
     
@@ -55,6 +57,15 @@ public class Pn_departamento extends javax.swing.JPanel {
     public void cargarTabla() {
         DefaultTableModel tb = dc.tablaDepartamentos();
         jt_departamentos.setModel(tb);
+        tamañoTabla();
+    }
+    
+      public void tamañoTabla() {
+        TableColumnModel columnModel = jt_departamentos.getColumnModel();
+        columnModel.getColumn(0).setPreferredWidth(10);
+        columnModel.getColumn(1).setPreferredWidth(180);
+        columnModel.getColumn(2).setPreferredWidth(180);
+
     }
  
     public void bloquearComponentes() {

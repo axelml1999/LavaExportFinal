@@ -22,6 +22,7 @@ public class Pn_Asistencia extends javax.swing.JPanel {
     public Pn_Asistencia() {
         initComponents();
   RowApariencia();
+  RowHeaderApariencia();
  
    
  
@@ -45,7 +46,7 @@ public class Pn_Asistencia extends javax.swing.JPanel {
         jb_buscar1 = new Utilerias.RSButtonMetro();
         bt_generar = new Utilerias.RSButtonMetro();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jt_Extras = new javax.swing.JTable();
+        jt_Asistencia = new javax.swing.JTable();
 
         setBackground(new java.awt.Color(255, 255, 255));
         setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -144,7 +145,7 @@ public class Pn_Asistencia extends javax.swing.JPanel {
         });
         add(bt_generar, new org.netbeans.lib.awtextra.AbsoluteConstraints(790, 530, 130, -1));
 
-        jt_Extras.setModel(new javax.swing.table.DefaultTableModel(
+        jt_Asistencia.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null},
                 {null, null, null},
@@ -155,12 +156,12 @@ public class Pn_Asistencia extends javax.swing.JPanel {
                 "Código", "Descripción", "Valor Aproximado"
             }
         ));
-        jt_Extras.addFocusListener(new java.awt.event.FocusAdapter() {
+        jt_Asistencia.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusGained(java.awt.event.FocusEvent evt) {
-                jt_ExtrasFocusGained(evt);
+                jt_AsistenciaFocusGained(evt);
             }
         });
-        jScrollPane1.setViewportView(jt_Extras);
+        jScrollPane1.setViewportView(jt_Asistencia);
 
         add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 310, 960, 90));
     }// </editor-fold>//GEN-END:initComponents
@@ -195,29 +196,29 @@ if (t_buscar.getText().trim().equals("") || t_buscar.getText().trim().toLowerCas
 
     }//GEN-LAST:event_bt_generarActionPerformed
 
-    private void jt_ExtrasFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jt_ExtrasFocusGained
+    private void jt_AsistenciaFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jt_AsistenciaFocusGained
         // TODO add your handling code here:
-    }//GEN-LAST:event_jt_ExtrasFocusGained
+    }//GEN-LAST:event_jt_AsistenciaFocusGained
 
  public void RowApariencia() {
-        jt_Extras.setFocusable(false);
+        jt_Asistencia.setFocusable(false);
         //espacio entre comulnas
-        jt_Extras.setIntercellSpacing(new Dimension(0, 1));
+        jt_Asistencia.setIntercellSpacing(new Dimension(0, 1));
         //altura de columnas 
-        jt_Extras.setRowHeight(25);
+        jt_Asistencia.setRowHeight(25);
         //margen entre filas
-        jt_Extras.setRowMargin(0);
+        jt_Asistencia.setRowMargin(0);
 //sin lineas verticles
-        jt_Extras.setShowVerticalLines(false);
-        jt_Extras.setSelectionBackground(new Color(97, 212, 195));
+        jt_Asistencia.setShowVerticalLines(false);
+        jt_Asistencia.setSelectionBackground(new Color(97, 212, 195));
  }
  
          public void RowHeaderApariencia() {
 
-        jt_Extras.getTableHeader().setFont(new Font("Century Gothic", Font.BOLD, 14));
-        jt_Extras.getTableHeader().setOpaque(false);
-        jt_Extras.getTableHeader().setBackground(new Color(97, 212, 195));
-        jt_Extras.getTableHeader().setForeground(new Color(255, 255, 255));
+        jt_Asistencia.getTableHeader().setFont(new Font("Century Gothic", Font.BOLD, 14));
+        jt_Asistencia.getTableHeader().setOpaque(false);
+        jt_Asistencia.getTableHeader().setBackground(new Color(97, 212, 195));
+        jt_Asistencia.getTableHeader().setForeground(new Color(255, 255, 255));
     
  
 }
@@ -229,7 +230,7 @@ if (t_buscar.getText().trim().equals("") || t_buscar.getText().trim().toLowerCas
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JSeparator jSeparator3;
     private Utilerias.RSButtonMetro jb_buscar1;
-    private javax.swing.JTable jt_Extras;
+    private javax.swing.JTable jt_Asistencia;
     private javax.swing.JTextField t_buscar;
     // End of variables declaration//GEN-END:variables
 }

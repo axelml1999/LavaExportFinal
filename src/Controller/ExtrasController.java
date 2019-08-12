@@ -19,7 +19,7 @@ import javax.swing.table.DefaultTableModel;
 public class ExtrasController extends ExtrasModel {
 
     public DefaultTableModel tablaExtras() {
-        String [] titulo = {"Id","extras"};
+        String [] titulo = {"Id","Extras"};
         DefaultTableModel tb = new DefaultTableModel(null, titulo);
 
 

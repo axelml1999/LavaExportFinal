@@ -59,6 +59,7 @@ public class Pn_Horario extends javax.swing.JPanel {
     public void cargarTabla(){
         DefaultTableModel tb = hc.tablaHorarios();
         jt_horarios.setModel(tb);
+        tamañoTabla();
     }
 
    public void bloquearComponentes() {
@@ -735,6 +736,7 @@ if(!t_entrada.getText().equals("Ingresar Entrada")){
     private void jt_horariosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jt_horariosMouseClicked
         ComponenteEditable();
         desbloquear_item();
+        
        
         //hc.guardar(accion, id, hora_entrada, hora_salida, turno);
         
@@ -755,6 +757,7 @@ if(!t_entrada.getText().equals("Ingresar Entrada")){
         
         cargarTabla();
         lb_errorCampos.setText("");
+
 
     }//GEN-LAST:event_jt_horariosMouseClicked
 

@@ -333,6 +333,9 @@ private void filtro(String consulta, JTable jtableBuscar){
             public void keyReleased(java.awt.event.KeyEvent evt) {
                 t_empleadoKeyReleased(evt);
             }
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                t_empleadoKeyTyped(evt);
+            }
         });
 
         jt_empleados.setModel(new javax.swing.table.DefaultTableModel(
@@ -1122,6 +1125,18 @@ cargar_datos(id_empleado);
         filtro(t_empleado.getText(), jt_empleados);
         // TODO add your handling code here:
     }//GEN-LAST:event_t_empleadoKeyReleased
+
+    private void t_empleadoKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_t_empleadoKeyTyped
+        // TODO add your handling code here:
+        char tecla;
+        tecla = evt.getKeyChar();
+        //Convertir a letras mayusculas
+        if (Character.isLetter(tecla)) {
+            evt.setKeyChar(Character.toUpperCase(tecla));
+
+        }
+        
+    }//GEN-LAST:event_t_empleadoKeyTyped
     
     public void RowApariencia() {
         jt_empleados.setFocusable(false);
