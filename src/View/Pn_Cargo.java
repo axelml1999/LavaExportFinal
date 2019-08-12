@@ -11,8 +11,11 @@ import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.event.KeyEvent;
+import javax.swing.JTable;
+import javax.swing.RowFilter;
 import javax.swing.border.LineBorder;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableRowSorter;
 
 /**
  *
@@ -44,24 +47,35 @@ public class Pn_Cargo extends javax.swing.JPanel {
         jt_cargos.setModel(tb);
     }
 
-    public void bloquearComponentes() {
+  public void bloquearComponentes() {
 
         t_cargo.setEnabled(false);
         bt_agregar.setEnabled(false);
         bt_cancelar.setEnabled(false);
-        
         bt_eliminar.setEnabled(false);
+        bt_nuevo.setEnabled(true);
+        bt_agregar.setText("Agregar");
 
     }
 
-    public void desbloquearComponentes() {
+     public void desbloquearComponentes() {
 
         t_cargo.setEnabled(true);
         bt_agregar.setEnabled(true);
         bt_cancelar.setEnabled(true);
-        
-        bt_eliminar.setEnabled(true);
+        bt_eliminar.setEnabled(false);
+        bt_nuevo.setEnabled(false);
 
+    }
+
+    public void desbloquear_item() {
+
+       t_cargo.setEnabled(true);
+        bt_agregar.setEnabled(true);
+        bt_cancelar.setEnabled(true);
+        bt_eliminar.setEnabled(true);
+        bt_nuevo.setEnabled(false);
+        bt_agregar.setText("Actualizar");
     }
 
     public void ComponenteNoEditable() {
@@ -283,6 +297,7 @@ public class Pn_Cargo extends javax.swing.JPanel {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
+        jt_cargos.getTableHeader().setReorderingAllowed(false);
         jt_cargos.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 jt_cargosMouseClicked(evt);
@@ -372,6 +387,11 @@ public class Pn_Cargo extends javax.swing.JPanel {
                 t_empleadoActionPerformed(evt);
             }
         });
+        t_empleado.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                t_empleadoKeyTyped(evt);
+            }
+        });
         add(t_empleado, new org.netbeans.lib.awtextra.AbsoluteConstraints(830, 120, 150, -1));
 
         jSeparator5.setBackground(new java.awt.Color(128, 128, 131));
@@ -380,17 +400,24 @@ public class Pn_Cargo extends javax.swing.JPanel {
         jLabel24.setFont(new java.awt.Font("Century Gothic", 1, 14)); // NOI18N
         jLabel24.setForeground(new java.awt.Color(128, 128, 131));
         jLabel24.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-        jLabel24.setText("Buscar Empleado");
+        jLabel24.setText("Buscar Cargo");
         add(jLabel24, new org.netbeans.lib.awtextra.AbsoluteConstraints(680, 120, -1, -1));
     }// </editor-fold>//GEN-END:initComponents
 
     private void bt_eliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bt_eliminarActionPerformed
+        
+        int filasel = jt_cargos.getSelectedRow();
+        id = Integer.parseInt(jt_cargos.getValueAt(filasel, 0).toString());
+        cc.eliminar(id);
+        cargarTabla();
+        limpiarCampos();
+        bt_eliminar.setText("Eliminar");
         // cargarTabla();
         //limpiarCampos();
     }//GEN-LAST:event_bt_eliminarActionPerformed
 
     private void bt_cancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bt_cancelarActionPerformed
-
+        bloquearComponentes();
         limpiarCampos();
         quitarBordeError();
         limpiarErrores();
@@ -431,11 +458,6 @@ public class Pn_Cargo extends javax.swing.JPanel {
             lb_errorCampos.setText("");
             limpiarCampos();
             bloquearComponentes();
-
-            lb_errorCampos.setText("");
-            limpiarCampos();
-            bloquearComponentes();
-            bt_nuevo.setEnabled(true);
 
             //PROGRAMADOR AQUÍ ESCRIBE TU CÓDIGO
             //FIN DEL CÓDIGO DEL PROGRAMADOR
@@ -488,9 +510,14 @@ public class Pn_Cargo extends javax.swing.JPanel {
     }//GEN-LAST:event_bt_nuevoMouseClicked
 
     private void bt_agregarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_bt_agregarMouseClicked
-        
+        int filasel = jt_cargos.getSelectedRow();
+        id = Integer.parseInt(jt_cargos.getValueAt(filasel, 0).toString());
+        descripcion = jt_cargos.getValueAt(filasel, 1).toString();
+        t_cargo.setText(descripcion);
+        accion = "M";
+        bt_agregar.setText("Modificar");
+        desbloquearComponentes();
 // TODO add your handling code here:
-
 
     }//GEN-LAST:event_bt_agregarMouseClicked
 
@@ -527,14 +554,28 @@ public class Pn_Cargo extends javax.swing.JPanel {
     }//GEN-LAST:event_t_empleadoActionPerformed
 
     private void jt_cargosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jt_cargosMouseClicked
-int filasel = jt_cargos.getSelectedRow();
-        id = Integer.parseInt(jt_cargos.getValueAt(filasel, 0).toString());
-        descripcion = jt_cargos.getValueAt(filasel, 1).toString();
+       ComponenteEditable();
+        desbloquear_item();
+        int filaSel = jt_cargos.getSelectedRow();
+        id = Integer.parseInt(jt_cargos.getValueAt(filaSel, 0).toString());
+        descripcion = jt_cargos.getValueAt(filaSel, 1).toString();
         t_cargo.setText(descripcion);
         accion = "M";
         bt_agregar.setText("Modificar");
-        desbloquearComponentes();        // TODO add your handling code here:
+        // TODO add your handling code here:
     }//GEN-LAST:event_jt_cargosMouseClicked
+    DefaultTableModel dm;
+
+    private void filtro(String consulta, JTable jtableBuscar) {
+        dm = (DefaultTableModel) jtableBuscar.getModel();
+        TableRowSorter<DefaultTableModel> tr = new TableRowSorter<>(dm);
+        jtableBuscar.setRowSorter(tr);
+        tr.setRowFilter(RowFilter.regexFilter(consulta));
+    }
+    private void t_empleadoKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_t_empleadoKeyTyped
+        filtro(t_empleado.getText(), jt_cargos);
+        // TODO add your handling code here:
+    }//GEN-LAST:event_t_empleadoKeyTyped
 
     public void RowApariencia() {
         jt_cargos.setFocusable(false);

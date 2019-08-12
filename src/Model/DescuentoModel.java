@@ -46,7 +46,7 @@ public class DescuentoModel extends database {
         PreparedStatement ps = null;
         conn = GetConnection();
         try {
-            ps = conn.prepareStatement("update descuento set descripcion_descuento=? where id_departamento=?");
+            ps = conn.prepareStatement("update descuento set descripcion_descuento=? where id_descuento=?");
             ps.setString(1, nombre);
             ps.setInt(2, id);
             ps.executeUpdate();
