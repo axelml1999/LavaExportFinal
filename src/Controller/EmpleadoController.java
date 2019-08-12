@@ -36,7 +36,7 @@ public class EmpleadoController extends EmpleadoModel {
     }
     
     public java.util.Date setFecha(String fecha) {
-        SimpleDateFormat formato = new SimpleDateFormat("d/MM/yyyy");
+        SimpleDateFormat formato = new SimpleDateFormat("yyyy/MM/dd");
         Date fechaE = null;
         
         try {

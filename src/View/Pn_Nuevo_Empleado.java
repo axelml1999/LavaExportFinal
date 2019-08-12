@@ -176,8 +176,17 @@ public class Pn_Nuevo_Empleado  extends javax.swing.JPanel {
         t_salario.setText(String.valueOf(salario));
         t_nss.setText(num_seg_social);
         t_rfc.setText(rfc);
-        jDateNacimiento.setDate(ec.setFecha(fecha_nacimiento));
-        jDateIngreso.setDate(ec.setFecha(fecha_entrada));
+       
+        java.util.Date fechap = null;
+        java.util.Date fechad = null;
+        try {
+            fechap = new SimpleDateFormat("yyyy-MM-dd").parse(fecha_entrada);
+            fechad = new SimpleDateFormat("yyyy-MM-dd").parse(fecha_nacimiento);
+        } catch (ParseException ex) {
+            Logger.getLogger(Pn_Nuevo_Empleado.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        jDateNacimiento.setDate(fechad);
+        jDateIngreso.setDate(fechap);
 
     }
 
@@ -1664,7 +1673,7 @@ public class Pn_Nuevo_Empleado  extends javax.swing.JPanel {
         Jp_contenidoLayout.setVerticalGroup(
             Jp_contenidoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(Jp_contenidoLayout.createSequentialGroup()
-                .addGap(15, 15, 15)
+                .addContainerGap()
                 .addComponent(jLabel7)
                 .addGap(21, 21, 21)
                 .addGroup(Jp_contenidoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -2689,6 +2698,7 @@ char tecla;
         bt_eliminar.setEnabled(true);
         jDateIngreso.setEnabled(true);
         jDateNacimiento.setEnabled(true);
+        jTab_Usuarios.setSelectedIndex(0);
     }
 
     public void ComponenteNoEditable() {
