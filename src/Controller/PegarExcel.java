@@ -100,6 +100,10 @@ public class PegarExcel implements ActionListener {
         } catch (IOException io) {
             System.out.println("io=" + io.getMessage());
         }
+        
+        
+        
+        
         TableColumn tcol = jTable1.getColumnModel().getColumn(3);
         TableColumn tco2 = jTable1.getColumnModel().getColumn(4);
         TableColumn tco3 = jTable1.getColumnModel().getColumn(5);
@@ -120,6 +124,31 @@ public class PegarExcel implements ActionListener {
         jTable1.getColumnModel().removeColumn(tco8);
         jTable1.getColumnModel().removeColumn(tco9);
 
+        
+        
+        
+        
+          DefaultTableModel dtm=(DefaultTableModel) jTable1.getModel();
+String a="";
+          for (int i = jTable1.getRowCount() -1; i >= 0; i--){
+if(jTable1.getValueAt(i, 0)==null){
+      dtm.removeRow(i);
+   
+}
+}
+jTable1.setModel(dtm);
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
         TableColumnModel colummodel = jTable1.getColumnModel();
         colummodel.getColumn(0).setPreferredWidth(3);
         colummodel.getColumn(1).setPreferredWidth(80);
