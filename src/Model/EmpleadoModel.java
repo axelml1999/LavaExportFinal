@@ -39,13 +39,13 @@ public class EmpleadoModel extends database {
     }
 
     protected void insertarEmpleado(String id_empleado, String id_horario, String id_cargo, String nombre, String a_paterno, String a_materno, String curp,
-             String id_departamento, String direccion, String salario, String sexo, String estatus, String num_seg_social, String rfc, String gratificacion) {
+             String id_departamento, String direccion, String salario, String sexo, String estatus, String num_seg_social, String rfc, String gratificacion, String fecha_nacimiento, String fecha_entrada) {
         PreparedStatement ps = null;
         conn = GetConnection();
         try {
             
             ps = conn.prepareStatement("insert into empleado(id_empleado,id_horario,id_cargo,nombre,apellido_paterno,apellido_materno,"
-                    + "curp,id_departamento,direccion,salario,sexo,estatus,num_seg_social,rfc,gratificacion) values(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)");
+                    + "curp,id_departamento,direccion,salario,sexo,estatus,num_seg_social,rfc,gratificacion,fecha_nacimiento,fecha_entrada) values(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)");
             ps.setString(1, id_empleado);
             ps.setString(2, id_horario);
             ps.setString(3, id_cargo);
@@ -61,6 +61,8 @@ public class EmpleadoModel extends database {
             ps.setString(13, num_seg_social);
             ps.setString(14, rfc);
             ps.setString(15, gratificacion);
+            ps.setString(16, fecha_nacimiento);
+            ps.setString(17, fecha_entrada);
             ps.executeUpdate();
         } catch (SQLException ex) {
             Logger.getLogger(EmpleadoModel.class.getName()).log(Level.SEVERE, null, ex);
@@ -69,12 +71,12 @@ public class EmpleadoModel extends database {
     }
 
     protected void modificarEmpleado(String id_empleado, String id_horario, String id_cargo, String nombre, String a_paterno, String a_materno, String curp,
-             String id_departamento, String direccion, String salario, String sexo, String estatus, String num_seg_social, String rfc, String gratificacion) {
+             String id_departamento, String direccion, String salario, String sexo, String estatus, String num_seg_social, String rfc, String gratificacion, String fecha_nacimiento, String fecha_entrada) {
         PreparedStatement ps = null;
         conn = GetConnection();
         try {
-            ps = conn.prepareStatement("update empleado set id_horario=? ,id_cargo=?, nombre=?, apellido_paterno=?, apellido_materno=?,"
-                    + "curp=?, id_departamento=?, direccion=?, salario=?, sexo=?, estatus=?, num_seg_social=?, rfc=? ,gratificacion=? where id_empleado=?");
+            ps = conn.prepareStatement("update empleado set id_empleado=?, id_horario=?, id_cargo=?, nombre=?, apellido_paterno=?, apellido_materno=?,"
+                    + "curp=?, id_departamento=?, direccion=?, salario=?, sexo=?, estatus=?, num_seg_social=?, rfc=? ,gratificacion=?, fecha_nacimiento=?, fecha_entrada=? where id_empleado=?");
             ps.setString(1, id_empleado);
             ps.setString(2, id_horario);
             ps.setString(3, id_cargo);
@@ -90,6 +92,9 @@ public class EmpleadoModel extends database {
             ps.setString(13, num_seg_social);
             ps.setString(14, rfc);
             ps.setString(15, gratificacion);
+            ps.setString(16, fecha_nacimiento);
+            ps.setString(17, fecha_entrada);
+            ps.setString(18, id_empleado);
             ps.executeUpdate();
         } catch (SQLException ex) {
             Logger.getLogger(EmpleadoModel.class.getName()).log(Level.SEVERE, null, ex);

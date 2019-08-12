@@ -13,6 +13,7 @@ import java.util.*;
 import java.io.IOException;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumn;
+import javax.swing.table.TableColumnModel;
 //----------------------------------------------------------------------------------------------------------------------
 
 public class PegarExcel implements ActionListener {
@@ -119,25 +120,30 @@ public class PegarExcel implements ActionListener {
         jTable1.getColumnModel().removeColumn(tco8);
         jTable1.getColumnModel().removeColumn(tco9);
 
-        DefaultTableModel dtm = (DefaultTableModel) jTable1.getModel();
-       String va = null;
-        int total = 0;
-        for (int i = 0; i < 398; i++) {
-            if (jTable1.getValueAt(i, 0) == null) {
-                total = i;
-                break;
-            }        }
-        System.out.print(total);
+        TableColumnModel colummodel = jTable1.getColumnModel();
+        colummodel.getColumn(0).setPreferredWidth(3);
+        colummodel.getColumn(1).setPreferredWidth(80);
+        colummodel.getColumn(2).setPreferredWidth(200);
+        colummodel.getColumn(3).setPreferredWidth(20);
+        colummodel.getColumn(4).setPreferredWidth(20);
+        colummodel.getColumn(5).setPreferredWidth(20);
+        colummodel.getColumn(6).setPreferredWidth(20);
+        colummodel.getColumn(7).setPreferredWidth(20);
+        colummodel.getColumn(8).setPreferredWidth(20);
+        colummodel.getColumn(9).setPreferredWidth(20);
+        colummodel.getColumn(10).setPreferredWidth(20);
+        colummodel.getColumn(11).setPreferredWidth(20);
+        colummodel.getColumn(12).setPreferredWidth(20);
+        colummodel.getColumn(13).setPreferredWidth(20);
+        colummodel.getColumn(14).setPreferredWidth(20);
+        colummodel.getColumn(15).setPreferredWidth(20);
+        colummodel.getColumn(16).setPreferredWidth(20);
+        colummodel.getColumn(17).setPreferredWidth(20);
+        colummodel.getColumn(18).setPreferredWidth(20);
+        colummodel.getColumn(19).setPreferredWidth(20);
+        colummodel.getColumn(20).setPreferredWidth(40);
+      
        
-        int[] rows = jTable1.getSelectedRows(); // En plural el rows.
-        Arrays.sort(rows);   // Ordena los indices ascendente, el mayor al final.
-
-// Recorremos el array rows (ya ordenado) empezando por el último.
-        for (int i = rows.length - 1; i >= total; i--) {
-            dtm.removeRow(rows[i]);
-        }
-
-        jTable1.setModel(dtm);
     }
 
 //----------------------------------------------------------------------------------------------------------------------
