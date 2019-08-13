@@ -5,6 +5,7 @@
  */
 package Controller;
 
+import View.Pn_Importar_Nomina;
 import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*;
@@ -17,7 +18,8 @@ import javax.swing.table.TableColumnModel;
 //----------------------------------------------------------------------------------------------------------------------
 
 public class PegarExcel implements ActionListener {
-
+ 
+     
     private String rowstring, value;
     private Clipboard system;
     private StringSelection stringSelection, stsel;
@@ -37,6 +39,7 @@ public class PegarExcel implements ActionListener {
 
     public JTable getJTable() {
         return jTable1;
+       
     }
 //----------------------------------------------------------------------------------------------------------------------
 
@@ -172,6 +175,7 @@ jTable1.setModel(dtm);
         colummodel.getColumn(19).setPreferredWidth(20);
         colummodel.getColumn(20).setPreferredWidth(40);
       
+        
        
     }
 
