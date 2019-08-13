@@ -41,7 +41,8 @@ DecimalFormat formato2 = new DecimalFormat("#.00");
     }
 
 public void SumarTabla(){
-    
+Produccion=0.0;Velada=0.0;viajes=0.0;domingo=0.0;vacaciones=0.0;T_extra=0.0;Total_sD=0.0;
+ retardos=0.0;oDescuentos=0.0;Pantalones=0.0;Infonavit=0.0;total=0.0;
    int totaltabla=tNomina.getRowCount();
    for(int i=0;i<totaltabla;i++){
        
@@ -648,6 +649,7 @@ SumarTabla();
                           
                      id_nomina_individual=INC.insertar_nomina_individual(id_empleado, String.valueOf( id_nomina), total_empleado);
                           INC.insertar_asistencias(String.valueOf(id_nomina_individual), dia1, dia2, dia3, dia4, dia5, dia6, "0");
+                          
                       }
 //jDialog1.setSize(530, 350);
 //
