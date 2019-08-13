@@ -21,6 +21,7 @@ import javax.swing.JOptionPane;
  */
 public class Pn_Importar_Nomina extends javax.swing.JPanel {
 DecimalFormat formato1 = new DecimalFormat("#,###,###.00");
+DecimalFormat formato2 = new DecimalFormat("#.00");
     String semana;
     String fechadesde;
     String fechahasta;
@@ -612,12 +613,42 @@ SumarTabla();
         fechadesde = formatoFecha.format(jdatadesde.getDate());
        fechahasta = formatoFecha.format(jdatahasta.getDate());
         String anio = ani.format(jdatadesde.getDate());
-        String t_extra_string=String.valueOf(Produccion+Velada+viajes+domingo+vacaciones+T_extra);
-        String descuentos_string=String.valueOf(retardos+oDescuentos+Pantalones+Infonavit);
-              INC.insertar_nomina(id_nomina, semana, anio, fechadesde, fechahasta, t_extra_string, descuentos_string, String.valueOf(total));
-                      for (int i = 0; i > totalfilas; i++) {
-
-                       }
+        String t_extra_string=String.valueOf(formato2.format(Produccion+Velada+viajes+domingo+vacaciones+T_extra));
+        String descuentos_string=String.valueOf(formato2.format(retardos+oDescuentos+Pantalones+Infonavit));
+        String id_empleado;
+        String total_empleado;
+        String dia1,dia2,dia3,dia4,dia5,dia6;
+      String Produccions="",Veladas="",viajess="",domingos="",vacacioness="",T_extras="",Total_sDs="";
+   String retardoss="",oDescuentoss="",Pantaloness="",Infonavits="",totals=""; 
+   int id_nomina_individual=0;
+        int id_nomina=INC.insertar_nomina( semana, anio, fechadesde, fechahasta, t_extra_string, descuentos_string, String.valueOf(formato2.format(total)));
+                      for (int i = 0; i < totalfilas; i++) {
+                          id_empleado=tNomina.getValueAt(i, 0).toString();
+                          
+                          dia1=tNomina.getValueAt(i, 3).toString();
+                          dia2=tNomina.getValueAt(i, 4).toString();
+                          dia3=tNomina.getValueAt(i, 5).toString();
+                          dia4=tNomina.getValueAt(i, 6).toString();
+                          dia5=tNomina.getValueAt(i, 7).toString();
+                          dia6=tNomina.getValueAt(i, 8).toString();
+                         
+                          Produccions=tNomina.getValueAt(i, 9).toString();
+                          Veladas=tNomina.getValueAt(i, 10).toString();
+                          viajess=tNomina.getValueAt(i, 11).toString();
+                          domingos=tNomina.getValueAt(i, 12).toString();
+                          vacacioness=tNomina.getValueAt(i, 13).toString();
+                          T_extras=tNomina.getValueAt(i, 14).toString();
+                          
+                          retardoss=tNomina.getValueAt(i, 16).toString();
+                          oDescuentoss=tNomina.getValueAt(i, 17).toString();
+                          Pantaloness=tNomina.getValueAt(i, 18).toString();
+                       Infonavits=tNomina.getValueAt(i, 19).toString();
+                       total_empleado=tNomina.getValueAt(i, 20).toString();
+                          
+                          
+                     id_nomina_individual=INC.insertar_nomina_individual(id_empleado, String.valueOf( id_nomina), total_empleado);
+                          INC.insertar_asistencias(String.valueOf(id_nomina_individual), dia1, dia2, dia3, dia4, dia5, dia6, "0");
+                      }
 //jDialog1.setSize(530, 350);
 //
 //jDialog1.setLocationRelativeTo(null);
