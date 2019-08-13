@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 10-08-2019 a las 22:26:05
+-- Tiempo de generación: 12-08-2019 a las 22:02:23
 -- Versión del servidor: 5.7.24
 -- Versión de PHP: 7.2.19
 
@@ -70,6 +70,14 @@ CREATE DEFINER=`root`@`localhost` PROCEDURE `consultarPago` ()  begin
 select * from pago;
 end$$
 
+CREATE DEFINER=`root`@`localhost` PROCEDURE `consultarR_desc_nom` ()  begin
+select * from r_desc_nom_i;
+end$$
+
+CREATE DEFINER=`root`@`localhost` PROCEDURE `consultarR_extras_nom` ()  begin
+select * from r_extrasnom_i;
+end$$
+
 CREATE DEFINER=`root`@`localhost` PROCEDURE `eliminarAsistencia` (IN `id` INT)  begin
 delete from asistencia 
 where id_asistencia=id;
@@ -115,6 +123,16 @@ delete from pago
 where id_empleado=id;
 end$$
 
+CREATE DEFINER=`root`@`localhost` PROCEDURE `eliminarR_desc_nom` (IN `id` INT)  begin
+delete from r_desc_nom_i
+where id_nomina_individual=id;
+end$$
+
+CREATE DEFINER=`root`@`localhost` PROCEDURE `eliminarR_extras_nom` (IN `id` INT)  begin
+delete from r_extrasnom_i
+where id_nomina_individual=id;
+end$$
+
 CREATE DEFINER=`root`@`localhost` PROCEDURE `insertarAsistencia` (IN `dia1` CHAR(1), IN `dia2` CHAR(1), IN `dia3` CHAR(1), IN `dia4` CHAR(1), IN `dia5` CHAR(1), IN `dia6` CHAR(1), IN `dia7` CHAR(1))  begin
 insert into asistencia (dia1,dia2,dia3,dia4,dia5,dia6,dia7)
 values (dia1,dia2,dia3,dia4,dia5,dia6,dia7);
@@ -157,14 +175,24 @@ insert into nomina_general (semana,fecha_inicio,fecha_fin,anio,total_extras,tota
 values (semana,fecha_inicio,fecha_fin,anio,total_extras,total_desc,total_nom);
 end$$
 
-CREATE DEFINER=`root`@`localhost` PROCEDURE `insertarNomInd` (IN `id_empleado` INT, IN `id_nomina_general` INT, IN `total_nom_ind` INT, IN `id_descuento` INT, IN `id_extras` INT, IN `id_asistencia` INT)  begin
-insert into nomina_individual (id_empleado,id_nomina_general,total_nom_ind,id_descuento,id_extras,id_asistencia)
-values (id_empleado,id_nomina_general,total_nom_ind,id_descuento,id_extras,id_asistencia);
+CREATE DEFINER=`root`@`localhost` PROCEDURE `insertarNomInd` (IN `id_empleado` INT, IN `id_nomina_general` INT, IN `total_nom_ind` INT, IN `id_asistencia` INT)  begin
+insert into nomina_individual (id_empleado,id_nomina_general,total_nom_ind,id_asistencia)
+values (id_empleado,id_nomina_general,total_nom_ind,id_asistencia);
 end$$
 
 CREATE DEFINER=`root`@`localhost` PROCEDURE `insertarPago` (IN `id_empleado` INT, IN `numero_cuenta` VARCHAR(20), IN `numero_tarjeta` VARCHAR(20), IN `descripcion_pago` VARCHAR(20))  begin
 insert into pago (id_empleado,numero_cuenta,numero_tarjeta,descripcion_pago)
 values (id_empleado,numero_cuenta,numero_tarjeta,descripcion_pago);
+end$$
+
+CREATE DEFINER=`root`@`localhost` PROCEDURE `insertarR_desc_nom` (IN `id_nomina_individual` INT, IN `id_descuento` INT, IN `cantidad` DECIMAL(10,2))  begin
+insert into r_desc_nom_i(id_nomina_individual,id_descuento,cantidad)
+values (id_nomina_individual,id_descuento,cantidad);
+end$$
+
+CREATE DEFINER=`root`@`localhost` PROCEDURE `insertarR_extras_nom` (IN `id_nomina_individual` INT, IN `id_extras` INT, IN `cantidad` DECIMAL(10,2))  begin
+insert into r_extrasnom_i(id_nomina_individual,id_extras,cantidad)
+values (id_nomina_individual,id_extras,cantidad);
 end$$
 
 CREATE DEFINER=`root`@`localhost` PROCEDURE `modificarAsistencia` (IN `dia1` CHAR(1), IN `dia2` CHAR(1), IN `dia3` CHAR(1), IN `dia4` CHAR(1), IN `dia5` CHAR(1), IN `dia6` CHAR(1), IN `dia7` CHAR(1), IN `id` INT)  begin
@@ -223,15 +251,24 @@ update pago set semana = semana, fecha_inicio = fecha_inicio, fecha_fin = fecha_
 where id_nomina_general=id;
 end$$
 
-CREATE DEFINER=`root`@`localhost` PROCEDURE `modificarNomInd` (IN `id_empleado` INT, IN `id_nomina_general` INT, IN `total_nom_ind` INT, IN `id_descuento` INT, IN `id_extras` INT, IN `id_asistencia` INT, IN `id` INT)  begin
-update nomina_individual set id_empleado = id_empleado, id_nomina_general = id_nomina_general , total_nom_ind = total_nom_ind ,  id_descuento = id_descuento ,
-id_extras = id_extras , id_asistencia  = id_asistencia 
+CREATE DEFINER=`root`@`localhost` PROCEDURE `modificarNomInd` (IN `id_empleado` INT, IN `id_nomina_general` INT, IN `total_nom_ind` INT, IN `id_asistencia` INT, IN `id` INT)  begin
+update nomina_individual set id_empleado = id_empleado, id_nomina_general = id_nomina_general , total_nom_ind = total_nom_ind , id_asistencia  = id_asistencia 
 where id_nomina_individual=id;
 end$$
 
 CREATE DEFINER=`root`@`localhost` PROCEDURE `modificarPago` (IN `numero_cuenta` VARCHAR(20), IN `numero_tarjeta` VARCHAR(20), IN `descripcion_pago` VARCHAR(20), IN `id` INT)  begin
 update pago set numero_cuenta = numero_cuenta , numero_tarjeta = numero_tarjeta , descripcion_pago = descripcion_pago
 where id_empleado=id;
+end$$
+
+CREATE DEFINER=`root`@`localhost` PROCEDURE `modificarR_desc_nom` (IN `id_descuento` INT, IN `cantidad` DECIMAL(10,2), IN `id` INT)  begin
+update r_desc_nom_i set id_descuento = id_descuento , cantidad  = cantidad 
+where id_nomina_individual=id;
+end$$
+
+CREATE DEFINER=`root`@`localhost` PROCEDURE `modificarR_extras_nom` (IN `id_extras` INT, IN `cantidad` DECIMAL(10,2), IN `id` INT)  begin
+update r_extrasnom_i set id_extras = id_extras , cantidad  = cantidad 
+where id_nomina_individual=id;
 end$$
 
 DELIMITER ;
@@ -427,8 +464,6 @@ CREATE TABLE `nomina_individual` (
   `id_empleado` int(11) NOT NULL,
   `id_nomina_general` int(11) NOT NULL,
   `total_nom_ind` int(11) NOT NULL,
-  `id_descuento` int(11) DEFAULT NULL,
-  `id_extras` int(11) DEFAULT NULL,
   `id_asistencia` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
@@ -436,8 +471,8 @@ CREATE TABLE `nomina_individual` (
 -- Volcado de datos para la tabla `nomina_individual`
 --
 
-INSERT INTO `nomina_individual` (`id_nomina_individual`, `id_empleado`, `id_nomina_general`, `total_nom_ind`, `id_descuento`, `id_extras`, `id_asistencia`) VALUES
-(1, 2, 1, 3, 1, NULL, 1);
+INSERT INTO `nomina_individual` (`id_nomina_individual`, `id_empleado`, `id_nomina_general`, `total_nom_ind`, `id_asistencia`) VALUES
+(1, 1, 1, 4, 1);
 
 -- --------------------------------------------------------
 
@@ -462,6 +497,44 @@ INSERT INTO `pago` (`id_empleado`, `numero_cuenta`, `numero_tarjeta`, `descripci
 -- --------------------------------------------------------
 
 --
+-- Estructura de tabla para la tabla `r_desc_nom_i`
+--
+
+CREATE TABLE `r_desc_nom_i` (
+  `id_nomina_individual` int(11) NOT NULL,
+  `id_descuento` int(11) NOT NULL,
+  `cantidad` decimal(10,2) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Volcado de datos para la tabla `r_desc_nom_i`
+--
+
+INSERT INTO `r_desc_nom_i` (`id_nomina_individual`, `id_descuento`, `cantidad`) VALUES
+(1, 1, '200.50');
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `r_extrasnom_i`
+--
+
+CREATE TABLE `r_extrasnom_i` (
+  `id_nomina_individual` int(11) NOT NULL,
+  `id_extras` int(11) NOT NULL,
+  `cantidad` decimal(10,2) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Volcado de datos para la tabla `r_extrasnom_i`
+--
+
+INSERT INTO `r_extrasnom_i` (`id_nomina_individual`, `id_extras`, `cantidad`) VALUES
+(1, 1, '100.00');
+
+-- --------------------------------------------------------
+
+--
 -- Estructura de tabla para la tabla `usuarios`
 --
 
@@ -470,6 +543,13 @@ CREATE TABLE `usuarios` (
   `username` varchar(20) NOT NULL,
   `password` text NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Volcado de datos para la tabla `usuarios`
+--
+
+INSERT INTO `usuarios` (`id_usuario`, `username`, `password`) VALUES
+(1, 'Administrador', 'ü\0\"âœæö¼y=çÂ3');
 
 --
 -- Índices para tablas volcadas
@@ -533,8 +613,6 @@ ALTER TABLE `nomina_individual`
   ADD PRIMARY KEY (`id_nomina_individual`),
   ADD KEY `id_empleado` (`id_empleado`),
   ADD KEY `id_nomina_general` (`id_nomina_general`),
-  ADD KEY `id_extras` (`id_extras`),
-  ADD KEY `id_descuento` (`id_descuento`),
   ADD KEY `id_asistencia` (`id_asistencia`);
 
 --
@@ -542,6 +620,20 @@ ALTER TABLE `nomina_individual`
 --
 ALTER TABLE `pago`
   ADD KEY `id_empleado` (`id_empleado`);
+
+--
+-- Indices de la tabla `r_desc_nom_i`
+--
+ALTER TABLE `r_desc_nom_i`
+  ADD KEY `id_nomina_individual` (`id_nomina_individual`),
+  ADD KEY `id_descuento` (`id_descuento`);
+
+--
+-- Indices de la tabla `r_extrasnom_i`
+--
+ALTER TABLE `r_extrasnom_i`
+  ADD KEY `id_nomina_individual` (`id_nomina_individual`),
+  ADD KEY `id_extras` (`id_extras`);
 
 --
 -- Indices de la tabla `usuarios`
@@ -605,7 +697,7 @@ ALTER TABLE `nomina_individual`
 -- AUTO_INCREMENT de la tabla `usuarios`
 --
 ALTER TABLE `usuarios`
-  MODIFY `id_usuario` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id_usuario` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- Restricciones para tablas volcadas
@@ -625,16 +717,27 @@ ALTER TABLE `empleado`
 ALTER TABLE `nomina_individual`
   ADD CONSTRAINT `nomina_individual_ibfk_1` FOREIGN KEY (`id_empleado`) REFERENCES `empleado` (`id_empleado`),
   ADD CONSTRAINT `nomina_individual_ibfk_2` FOREIGN KEY (`id_nomina_general`) REFERENCES `nomina_general` (`id_nomina_general`),
-  ADD CONSTRAINT `nomina_individual_ibfk_3` FOREIGN KEY (`id_descuento`) REFERENCES `descuento` (`id_descuento`),
-  ADD CONSTRAINT `nomina_individual_ibfk_4` FOREIGN KEY (`id_extras`) REFERENCES `extras` (`id_extras`),
-  ADD CONSTRAINT `nomina_individual_ibfk_5` FOREIGN KEY (`id_descuento`) REFERENCES `descuento` (`id_descuento`),
-  ADD CONSTRAINT `nomina_individual_ibfk_6` FOREIGN KEY (`id_asistencia`) REFERENCES `asistencia` (`id_asistencia`);
+  ADD CONSTRAINT `nomina_individual_ibfk_3` FOREIGN KEY (`id_asistencia`) REFERENCES `asistencia` (`id_asistencia`);
 
 --
 -- Filtros para la tabla `pago`
 --
 ALTER TABLE `pago`
   ADD CONSTRAINT `pago_ibfk_1` FOREIGN KEY (`id_empleado`) REFERENCES `empleado` (`id_empleado`);
+
+--
+-- Filtros para la tabla `r_desc_nom_i`
+--
+ALTER TABLE `r_desc_nom_i`
+  ADD CONSTRAINT `r_desc_nom_i_ibfk_1` FOREIGN KEY (`id_nomina_individual`) REFERENCES `nomina_individual` (`id_nomina_individual`),
+  ADD CONSTRAINT `r_desc_nom_i_ibfk_2` FOREIGN KEY (`id_descuento`) REFERENCES `descuento` (`id_descuento`);
+
+--
+-- Filtros para la tabla `r_extrasnom_i`
+--
+ALTER TABLE `r_extrasnom_i`
+  ADD CONSTRAINT `r_extrasnom_i_ibfk_1` FOREIGN KEY (`id_nomina_individual`) REFERENCES `nomina_individual` (`id_nomina_individual`),
+  ADD CONSTRAINT `r_extrasnom_i_ibfk_2` FOREIGN KEY (`id_extras`) REFERENCES `extras` (`id_extras`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
