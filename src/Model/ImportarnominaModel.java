@@ -115,8 +115,40 @@ public class ImportarnominaModel extends database{
         }
        
     }
-        
-        
+         protected void insertar_descuentos(String idnomina, String id_descuento, Double cantidad) {
+        PreparedStatement ps = null;
+     conn = GetConnection();
+        try {
+            
+            ps = conn.prepareStatement("insert into r_desc_nom_i(id_nomina_individual,id_descuento,cantidad)"
+                    + "values(?,?,?)");
+            ps.setString(1, idnomina);
+            ps.setString(2, id_descuento);
+            ps.setDouble(3,cantidad);
+              
+            ps.executeUpdate();
+        } catch (SQLException ex) {
+            Logger.getLogger(EmpleadoModel.class.getName()).log(Level.SEVERE, null, ex);
+        }
+       
+    }   
+             protected void insertar_Extra(String idnomina, String id_extra,Double cantidad) {
+        PreparedStatement ps = null;
+     conn = GetConnection();
+        try {
+            
+            ps = conn.prepareStatement("insert into r_extrasnom_i(id_nomina_individual,id_extra,cantidad)"
+                    + "values(?,?,?)");
+            ps.setString(1, idnomina);
+            ps.setString(2, id_extra);
+            ps.setDouble(3,cantidad);
+              
+            ps.executeUpdate();
+        } catch (SQLException ex) {
+            Logger.getLogger(EmpleadoModel.class.getName()).log(Level.SEVERE, null, ex);
+        }
+       
+    }    
        
         
 }

@@ -50,4 +50,30 @@ public class DescuentoController extends DescuentoModel {
     public void eliminar(int id) {
         eliminarDescuento(id);
     }
+    public String consultar_id(String descripcion) {
+        ResultSet rs =consultarDescuento_id(descripcion);
+     String valor="";
+        try {
+            while(rs.next()){
+                valor=rs.getString("id_descuento");
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(DescuentoController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return valor;
+
+    }
+   public String consultar_descripcion(String id) {
+        ResultSet rs =consultarDescuento_descripcion(id);
+     String valor="";
+        try {
+            while(rs.next()){
+                valor=rs.getString("descripcion_descuento");
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(DescuentoController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return valor;
+
+    }
 }
