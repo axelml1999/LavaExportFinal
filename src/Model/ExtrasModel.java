@@ -28,12 +28,12 @@ public class ExtrasModel extends database {
    }
      
    protected ResultSet consultarExtras_id(String descripcion){
-       ResultSet rs = Read("select * from extras where descripcion='"+descripcion+"'");
+       ResultSet rs = Read("select * from extras where descripcion_extras='"+descripcion+"'");
        return rs;
    }
    
    protected ResultSet consultarExtras_descripcion(String id){
-       ResultSet rs = Read("select * from extras where extras='"+id+"'");
+       ResultSet rs = Read("select * from extras where extras="+id+"");
        return rs;
    }
    protected void insertarExtras(String descripcion) {

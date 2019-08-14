@@ -53,12 +53,17 @@ public class ImportarnominaController  extends ImportarnominaModel{
      insertarAsistencia(idnomina, dia1, dia2, dia3, dia4, dia5, dia6, dia7);
      
       }
- 
+  public void insertar_procedimiento_java( String id_empleado,String nominaGeneral,String total_indi, String dia1, String dia2, String dia3, String dia4, String dia5,
+             String dia6, String dia7){
+       NominaTotalProcedure(id_empleado, nominaGeneral, total_indi, dia1, dia2, dia3, dia4, dia5, dia6, dia7);
+     
+      }
+  
  public void Inserta_extra_individual(String id_nomina,Double cantidad,String id_extra){
      
      
      String valor=ex.consultar_id(id_extra);
-   
+
      insertar_Extra(id_nomina, valor, cantidad);
       
      
@@ -66,7 +71,7 @@ public class ImportarnominaController  extends ImportarnominaModel{
  public void Inserta_descuento_individual(String id_nomina,Double cantidad,String id_descuento){
      
    
-     String valor=dc.consultar_descripcion(id_descuento);
+     String valor=dc.consultar_id(id_descuento);
    
      insertar_descuentos(id_nomina, valor, cantidad);
       

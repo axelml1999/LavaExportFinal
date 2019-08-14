@@ -54,7 +54,7 @@ public class ExtrasController extends ExtrasModel {
       String valor="";
         try {
             while(rs.next()){
-                valor=rs.getString(1);
+                valor=rs.getString("id_extras");
             } } catch (SQLException ex) {
             Logger.getLogger(ExtrasController.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -68,7 +68,7 @@ public class ExtrasController extends ExtrasModel {
       String valor="";
         try {
             while(rs.next()){
-                valor=rs.getString(1);
+                valor=rs.getString("descripcion_extras");
             } } catch (SQLException ex) {
             Logger.getLogger(ExtrasController.class.getName()).log(Level.SEVERE, null, ex);
         }

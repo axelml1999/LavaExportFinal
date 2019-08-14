@@ -658,19 +658,20 @@ public class Pn_Importar_Nomina extends javax.swing.JPanel {
             Infonavits = tNomina.getValueAt(i, 19).toString();
             total_empleado = tNomina.getValueAt(i, 20).toString();
 
-            id_nomina_individual = INC.insertar_nomina_individual(id_empleado, String.valueOf(id_nomina), total_empleado);
-            INC.insertar_asistencias(String.valueOf(id_nomina_individual), dia1, dia2, dia3, dia4, dia5, dia6, "0");
-            INC.Inserta_extra_individual(String.valueOf(id_nomina_individual), Double.parseDouble(Produccions), "PRODUCCIÓN");
-            INC.Inserta_extra_individual(String.valueOf(id_nomina_individual), Double.parseDouble(Veladas), "VELADA");
-            INC.Inserta_extra_individual(String.valueOf(id_nomina_individual), Double.parseDouble(viajess), "VIAJE");
-            INC.Inserta_extra_individual(String.valueOf(id_nomina_individual), Double.parseDouble(domingos), "DOMINGO");
-            INC.Inserta_extra_individual(String.valueOf(id_nomina_individual), Double.parseDouble(vacacioness), "VACACIONES");
-            INC.Inserta_extra_individual(String.valueOf(id_nomina_individual), Double.parseDouble(T_extras), "T_EXTRA");
-
-            INC.Inserta_descuento_individual(String.valueOf(id_nomina_individual), Double.parseDouble(retardoss), "RETARDO");
-            INC.Inserta_descuento_individual(String.valueOf(id_nomina_individual), Double.parseDouble(oDescuentoss), "OTROS DESCUENTOS");
-            INC.Inserta_descuento_individual(String.valueOf(id_nomina_individual), Double.parseDouble(Pantaloness), "PANTALONES");
-            INC.Inserta_descuento_individual(String.valueOf(id_nomina_individual), Double.parseDouble(Infonavits), "INFONAVIT");
+           
+            INC.insertar_procedimiento_java(id_empleado, String.valueOf(id_nomina), total_empleado, dia1, dia2, dia3, dia4, dia5, dia6, dia6);
+            
+//            INC.Inserta_extra_individual(String.valueOf(id_nomina_individual), Double.parseDouble(Produccions), "PRODUCCION");
+//            INC.Inserta_extra_individual(String.valueOf(id_nomina_individual), Double.parseDouble(Veladas), "VELADA");
+//            INC.Inserta_extra_individual(String.valueOf(id_nomina_individual), Double.parseDouble(viajess), "VIAJE");
+//            INC.Inserta_extra_individual(String.valueOf(id_nomina_individual), Double.parseDouble(domingos), "DOMINGO");
+//            INC.Inserta_extra_individual(String.valueOf(id_nomina_individual), Double.parseDouble(vacacioness), "VACACIONES");
+//            INC.Inserta_extra_individual(String.valueOf(id_nomina_individual), Double.parseDouble(T_extras), "TIEMPO EXTRA");
+//
+//            INC.Inserta_descuento_individual(String.valueOf(id_nomina_individual), Double.parseDouble(retardoss), "RETARDO");
+//            INC.Inserta_descuento_individual(String.valueOf(id_nomina_individual), Double.parseDouble(oDescuentoss), "OTROS DESCUENTOS");
+//            INC.Inserta_descuento_individual(String.valueOf(id_nomina_individual), Double.parseDouble(Pantaloness), "PANTALONES");
+//            INC.Inserta_descuento_individual(String.valueOf(id_nomina_individual), Double.parseDouble(Infonavits), "INFONAVIT");
 
         }
 //jDialog1.setSize(530, 350);
