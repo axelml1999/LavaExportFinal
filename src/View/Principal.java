@@ -39,6 +39,7 @@ public class Principal extends javax.swing.JFrame implements Runnable {
     public Principal() {
         setPantalla();
         initComponents();
+        setIconImage(new ImageIcon(getClass().getResource("/Imagenes/logosmall.png")).getImage());
       //  full_Screen();
         centrarPantalla();
         execute();
@@ -323,8 +324,8 @@ NoScrollBar();
             .addGroup(panelMenuLayout.createSequentialGroup()
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(scroll_Menu, javax.swing.GroupLayout.DEFAULT_SIZE, 334, Short.MAX_VALUE)
-                .addGap(45, 45, 45)
+                .addComponent(scroll_Menu, javax.swing.GroupLayout.DEFAULT_SIZE, 368, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(bt_acerdaDe, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(24, 24, 24))
         );
@@ -401,6 +402,13 @@ NoScrollBar();
                 new CambiaPanel(pnlPrincipal, new Pn_Descuentos());
             }
         });
+          
+          MenuItem RepNomina = new MenuItem(subMenus, "Consultar Nómina", 10, new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent ae) {
+                new CambiaPanel(pnlPrincipal, new Pn_Consultar_nomina());
+            }
+        });
 
         //SUBMENU REPORTES
         MenuItem RepNominaGral = new MenuItem(subMenus, "Nómina General", 10, new ActionListener() {
@@ -415,6 +423,20 @@ NoScrollBar();
             @Override
             public void actionPerformed(ActionEvent ae) {
                 new CambiaPanel(pnlPrincipal, new Pn_Nomina_Individual());
+            }
+        });
+        
+        MenuItem RepCumpleaños = new MenuItem(subMenus, "Cumpleaños", 10, new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent ae) {
+                new CambiaPanel(pnlPrincipal, new Pn_cumpleaños());
+            }
+        });
+        
+        MenuItem RepAntiguedad = new MenuItem(subMenus, "Antigüedad", 10, new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent ae) {
+                new CambiaPanel(pnlPrincipal, new Pn_Antiguedad());
             }
         });
         
@@ -453,8 +475,8 @@ NoScrollBar();
         });
 
         MenuItem Archivo = new MenuItem(iconArchivo, "Archivo", 35, null, empleado, horario, cargo, departamento, pago);
-        MenuItem Nominas = new MenuItem(iconNominas, "Nominas", 35, null,  RepImportar, RepExtras, RepDescuentos);
-        MenuItem Reportes = new MenuItem(iconReportes, "Reportes", 35, null, RepNominaGral, RepNominaIndividual, RepAsistencias);
+        MenuItem Nominas = new MenuItem(iconNominas, "Nominas", 35, null,  RepImportar, RepExtras, RepDescuentos, RepNomina);
+        MenuItem Reportes = new MenuItem(iconReportes, "Reportes", 35, null, RepNominaGral, RepNominaIndividual, RepAsistencias, RepCumpleaños, RepAntiguedad);
         //MenuItem Configuracion = new MenuItem(iconConfiguracion, "Configuración", 35, null, );
 
         addMenu(MenuHome, Archivo, Nominas, Reportes); //Configuracion);
