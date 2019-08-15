@@ -92,6 +92,8 @@ public class Pn_Pago extends javax.swing.JPanel {
         t_tarjeta.setText(numero_tarjeta);
         t_descripcion.setText(descripcion_pago);
         t_cuenta.setText(numero_cuenta);
+        desbloquearComponentes();
+        ComponenteEditable();
         
     }
     
@@ -100,11 +102,13 @@ public class Pn_Pago extends javax.swing.JPanel {
         t_cuenta.setEnabled(true);
         t_tarjeta.setEnabled(true);
         t_descripcion.setEnabled(true);
+        bt_nuevo.setEnabled(false);
         bt_agregar.setEnabled(true);
         bt_cancelar.setEnabled(true);
         t_banco.setEnabled(true);
         bt_eliminar.setEnabled(true);
         jTab_Usuarios.setSelectedIndex(1);
+        bt_agregar.setText("Actualizar");
     }
     
     public void ComponenteNoEditable() {
@@ -312,7 +316,7 @@ private void filtro(String consulta, JTable jtableBuscar){
         Jp_contenido.setBackground(new java.awt.Color(255, 255, 255));
 
         t_empleado.setForeground(new java.awt.Color(153, 153, 153));
-        t_empleado.setText("Ingrese Número de Empleado");
+        t_empleado.setText("Ingrese Nombre del Empleado");
         t_empleado.setBorder(null);
         t_empleado.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusLost(java.awt.event.FocusEvent evt) {
@@ -823,7 +827,7 @@ if(t_tarjeta.getText().equals("")||t_cuenta.getText().equals("")){
             limpiarCampos();
             bloquearComponentes();            
             bt_nuevo.setEnabled(true);
-cargar_tabla();
+            cargar_tabla();
             //PROGRAMADOR AQUÍ ESCRIBE TU CÓDIGO
             //FIN DEL CÓDIGO DEL PROGRAMADOR
         }
@@ -833,7 +837,7 @@ cargar_tabla();
         limpiarCampos();
         quitarBordeError();
         limpiarErrores();
-bloquearComponentes();
+        bloquearComponentes();
         // TODO add your handling code here:
     }//GEN-LAST:event_bt_cancelarActionPerformed
 
@@ -991,7 +995,7 @@ bloquearComponentes();
 
     private void t_empleadoFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_t_empleadoFocusLost
         if (t_empleado.getText().trim().equals("")) {
-            t_empleado.setText("Ingrese Número de Empleado");
+            t_empleado.setText("Ingrese Nombre del Empleado");
             t_empleado.setForeground(new Color(153, 153, 153));
             
         }
@@ -1109,12 +1113,14 @@ bloquearComponentes();
         int filasel = jt_empleados.getSelectedRow();
         id_empleado=jt_empleados.getValueAt(filasel, 0).toString();
         nombre = jt_empleados.getValueAt(filasel, 1).toString();
-jTab_Usuarios.setSelectedIndex(1);
+        jTab_Usuarios.setSelectedIndex(1);
         cargar_datos(id_empleado);
 
         t_numEmpleado.setText(id_empleado);
         t_nomEmpleado.setText(nombre);
-cargar_datos(id_empleado);
+        cargar_datos(id_empleado);
+        desbloquearComponentes();
+        ComponenteEditable();
 
 
         // TODO add your handling code here:

@@ -13,6 +13,10 @@ import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
+import ds.desktop.notify.DesktopNotify;
+import ds.desktop.notify.NotifyTheme;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 /**
  *
@@ -23,7 +27,7 @@ public class DepartamentoModel extends database {
     Connection conn;
 
     protected ResultSet consultarDepartamentos() {
-        ResultSet rs = Read("select * from departamento");
+        ResultSet rs = Read("call consultarDepartamento");
         return rs;
 
     }
@@ -46,21 +50,21 @@ public class DepartamentoModel extends database {
         PreparedStatement ps = null;
         conn = GetConnection();
         try {
-            ps = conn.prepareStatement("insert into departamento(area,num_trab) values(?,?)");
+            ps = conn.prepareStatement("call insertarDepartamento(?,?)");
             ps.setString(1, nombre);
             ps.setInt(2, capacidad);
             ps.executeUpdate();
         } catch (SQLException ex) {
             Logger.getLogger(DepartamentoModel.class.getName()).log(Level.SEVERE, null, ex);
         }
-        JOptionPane.showMessageDialog(null, "Registro Insertado");
+        DesktopNotify.showDesktopMessage("Registro Insertado", "El departamento ha sido registrado con exito", DesktopNotify.SUCCESS);
     }
 
     protected void modificarDepartamento(int id, String nombre, int capacidad) {
         PreparedStatement ps = null;
         conn = GetConnection();
         try {
-            ps = conn.prepareStatement("update departamento set area=?, num_trab=? where id_departamento=?");
+            ps = conn.prepareStatement("call modificarDepartamento(?,?,?)");
             ps.setString(1, nombre);
             ps.setInt(2, capacidad);
             ps.setInt(3, id);
@@ -69,23 +73,23 @@ public class DepartamentoModel extends database {
 
             Logger.getLogger(DepartamentoModel.class.getName()).log(Level.SEVERE, null, ex);
         }
-        JOptionPane.showMessageDialog(null, "Registro Actualizado");
+       DesktopNotify.showDesktopMessage("Registro Actualizado", "El departamento ha sido actualizado con exito", DesktopNotify.SUCCESS);
     }
 
     protected void eliminarDepartamento(int id) {
-        PreparedStatement ps = null;
+       PreparedStatement ps = null;
         conn = GetConnection();
         try {
-            ps = conn.prepareStatement("delete from departamento where id_departamento=?");
+            ps = conn.prepareStatement("call eliminarDepartamento(?)");
 
             ps.setInt(1, id);
             ps.executeUpdate();
         } catch (SQLException ex) {
 
             Logger.getLogger(DepartamentoModel.class.getName()).log(Level.SEVERE, null, ex);
-            JOptionPane.showMessageDialog(null, "No se puede eliminar un registro ligado a otra tabla");
+            DesktopNotify.showDesktopMessage("ERROR", "No se puede eliminar un registro ligado con otra tabla", DesktopNotify.ERROR);
         }
-        JOptionPane.showMessageDialog(null, "Registro Eliminado");
+        DesktopNotify.showDesktopMessage("Registro Eliminado", "El departamento ha sido eliminado con exito", DesktopNotify.FAIL);
     }
 
 }

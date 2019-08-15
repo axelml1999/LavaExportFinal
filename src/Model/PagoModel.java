@@ -14,6 +14,10 @@ import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
+import ds.desktop.notify.DesktopNotify;
+import ds.desktop.notify.NotifyTheme;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 public class PagoModel  extends database {
 
@@ -44,7 +48,7 @@ public class PagoModel  extends database {
         } catch (SQLException ex) {
             Logger.getLogger(PagoModel.class.getName()).log(Level.SEVERE, null, ex);
         }
-        JOptionPane.showMessageDialog(null, "Registro Insertado");
+        DesktopNotify.showDesktopMessage("Registro Insertado", "El tipo de pago ha sido registrado con exito", DesktopNotify.SUCCESS);
     }
      protected void modificarPago(String id_empleado,String numero_cuenta, String numero_tarjeta, String descripcion_pago){
        PreparedStatement ps = null;
@@ -61,7 +65,7 @@ public class PagoModel  extends database {
             
             Logger.getLogger(PagoModel.class.getName()).log(Level.SEVERE, null, ex);
         }
-        JOptionPane.showMessageDialog(null, "Registro Actualizado");
+        DesktopNotify.showDesktopMessage("Registro Actualizado", "El tipo de pago ha sido actualizado con exito", DesktopNotify.SUCCESS);
 }
      protected void eliminarPago(String id) {
         PreparedStatement ps = null;
@@ -75,7 +79,7 @@ public class PagoModel  extends database {
 
             Logger.getLogger(PagoModel.class.getName()).log(Level.SEVERE, null, ex);
         }
-        JOptionPane.showMessageDialog(null, "Registro Eliminado");
+        DesktopNotify.showDesktopMessage("Registro Eliminado", "El tipo de pago ha sido eliminado con exito", DesktopNotify.FAIL);
     }
 }
 

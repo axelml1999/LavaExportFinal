@@ -14,6 +14,10 @@ import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
+import ds.desktop.notify.DesktopNotify;
+import ds.desktop.notify.NotifyTheme;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 /**
  *
@@ -24,7 +28,7 @@ public class EmpleadoModel extends database {
     Connection conn;
 
     protected ResultSet consultarEmpleado() {
-        ResultSet rs = Read("select * from empleado");
+        ResultSet rs = Read("call consultarEmpleados");
         return rs;
     }
     
@@ -45,7 +49,7 @@ public class EmpleadoModel extends database {
         try {
             
             ps = conn.prepareStatement("insert into empleado(id_empleado,id_horario,id_cargo,nombre,apellido_paterno,apellido_materno,"
-                    + "curp,id_departamento,direccion,salario,sexo,estatus,num_seg_social,rfc,gratificacion,fecha_nacimiento,fecha_entrada) values(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)");
+                   + "curp,id_departamento,direccion,salario,sexo,estatus,num_seg_social,rfc,gratificacion,fecha_nacimiento,fecha_entrada) values(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)");
             ps.setString(1, id_empleado);
             ps.setString(2, id_horario);
             ps.setString(3, id_cargo);
@@ -67,7 +71,7 @@ public class EmpleadoModel extends database {
         } catch (SQLException ex) {
             Logger.getLogger(EmpleadoModel.class.getName()).log(Level.SEVERE, null, ex);
         }
-        JOptionPane.showMessageDialog(null, "Registro Insertado");
+        DesktopNotify.showDesktopMessage("Registro Insertado", "El empleado ha sido registrado con exito", DesktopNotify.SUCCESS);
     }
 
     protected void modificarEmpleado(String id_empleado, String id_horario, String id_cargo, String nombre, String a_paterno, String a_materno, String curp,
@@ -99,7 +103,7 @@ public class EmpleadoModel extends database {
         } catch (SQLException ex) {
             Logger.getLogger(EmpleadoModel.class.getName()).log(Level.SEVERE, null, ex);
         }
-        JOptionPane.showMessageDialog(null, "Registro Actualizado");
+        DesktopNotify.showDesktopMessage("Registro Actualizado", "El empleado ha sido actualizado con exito", DesktopNotify.SUCCESS);
     }
     
     protected void eliminarEmpleado(String id_empleado){
@@ -114,7 +118,7 @@ public class EmpleadoModel extends database {
             
             Logger.getLogger(EmpleadoModel.class.getName()).log(Level.SEVERE, null, ex);
         }
-        JOptionPane.showMessageDialog(null, "Registro Eliminado");
+        DesktopNotify.showDesktopMessage("Registro Eliminado", "El empleado ha sido eliminado con exito", DesktopNotify.FAIL);
    }
 
 }

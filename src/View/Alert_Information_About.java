@@ -8,6 +8,7 @@ package View;
 import Utilerias.AWTUtilities;
 import java.util.TimerTask;
 import java.util.Timer;
+import java.awt.Toolkit;
 
 /**
  *
@@ -276,6 +277,10 @@ public class Alert_Information_About extends javax.swing.JDialog {
     }
 
     private void Ubicar(int y) {
-        this.setLocation(550, y - 120);
+        
+        Toolkit tk = Toolkit.getDefaultToolkit();
+        int xsize = (int) tk.getScreenSize().getWidth()/2;
+        this.setLocation(xsize, y - 120);
+        
     }
 }

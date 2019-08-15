@@ -14,6 +14,10 @@ import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
+import ds.desktop.notify.DesktopNotify;
+import ds.desktop.notify.NotifyTheme;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 /**
  *
@@ -24,7 +28,7 @@ public class DescuentoModel extends database {
     Connection conn;
 
     protected ResultSet consultarDescuento() {
-        ResultSet rs = Read("select * from descuento");
+        ResultSet rs = Read("call consultarDescuento");
         return rs;
 
     }
@@ -33,20 +37,20 @@ public class DescuentoModel extends database {
         PreparedStatement ps = null;
         conn = GetConnection();
         try {
-            ps = conn.prepareStatement("insert into descuento(descripcion_descuento) values(?)");
+            ps = conn.prepareStatement("call insertarDescuento(?)");
             ps.setString(1, nombre);
             ps.executeUpdate();
         } catch (SQLException ex) {
             Logger.getLogger(DescuentoModel.class.getName()).log(Level.SEVERE, null, ex);
         }
-        JOptionPane.showMessageDialog(null, "Registro Insertado");
+        DesktopNotify.showDesktopMessage("Registro Insertado", "El descuento ha sido registrado con exito", DesktopNotify.SUCCESS);
     }
 
     protected void modificarDescuento(int id, String nombre) {
         PreparedStatement ps = null;
         conn = GetConnection();
         try {
-            ps = conn.prepareStatement("update descuento set descripcion_descuento=? where id_descuento=?");
+            ps = conn.prepareStatement("call modificarDescuento(?,?)");
             ps.setString(1, nombre);
             ps.setInt(2, id);
             ps.executeUpdate();
@@ -54,14 +58,14 @@ public class DescuentoModel extends database {
 
             Logger.getLogger(DescuentoModel.class.getName()).log(Level.SEVERE, null, ex);
         }
-        JOptionPane.showMessageDialog(null, "Registro Actualizado");
+        DesktopNotify.showDesktopMessage("Registro Actualizado", "El descuento ha sido actualizado con exito", DesktopNotify.SUCCESS);
     }
 
     protected void eliminarDescuento(int id) {
         PreparedStatement ps = null;
         conn = GetConnection();
         try {
-            ps = conn.prepareStatement("delete from descuento where id_departamento=?");
+            ps = conn.prepareStatement("call eliminarDescuento(?)");
 
             ps.setInt(1, id);
             ps.executeUpdate();
@@ -69,6 +73,6 @@ public class DescuentoModel extends database {
 
             Logger.getLogger(DescuentoModel.class.getName()).log(Level.SEVERE, null, ex);
         }
-        JOptionPane.showMessageDialog(null, "Registro Eliminado");
+        DesktopNotify.showDesktopMessage("Registro Eliminado", "El descuento ha sido eliminado con exito", DesktopNotify.FAIL);
     }
 }
