@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 15-08-2019 a las 02:52:48
+-- Tiempo de generación: 15-08-2019 a las 04:50:49
 -- Versión del servidor: 5.7.24
 -- Versión de PHP: 7.2.19
 
@@ -185,7 +185,7 @@ DELIMITER ;
 --
 
 CREATE TABLE `asistencia` (
-  `id_nomina_general` int(11) DEFAULT NULL,
+  `id_nomina_individual` int(11) DEFAULT NULL,
   `dia1` char(6) DEFAULT NULL,
   `dia2` char(6) DEFAULT NULL,
   `dia3` char(6) DEFAULT NULL,
@@ -250,8 +250,10 @@ CREATE TABLE `descuento` (
 --
 
 INSERT INTO `descuento` (`id_descuento`, `descripcion_descuento`) VALUES
-(1, 'Retardo'),
-(2, 'Prestamo');
+(3, 'Retardos'),
+(4, 'Otros Descuentos'),
+(5, 'Pantalones'),
+(6, 'Infonavit');
 
 -- --------------------------------------------------------
 
@@ -303,8 +305,12 @@ CREATE TABLE `extras` (
 --
 
 INSERT INTO `extras` (`id_extras`, `descripcion_extras`) VALUES
-(1, 'horas extras'),
-(2, 'dias festivos');
+(3, 'Produccion'),
+(4, 'Velada'),
+(5, 'Viajes'),
+(6, 'Domingo'),
+(7, 'Vacaciones'),
+(8, 'Tiempo extra');
 
 -- --------------------------------------------------------
 
@@ -522,13 +528,13 @@ ALTER TABLE `departamento`
 -- AUTO_INCREMENT de la tabla `descuento`
 --
 ALTER TABLE `descuento`
-  MODIFY `id_descuento` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id_descuento` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT de la tabla `extras`
 --
 ALTER TABLE `extras`
-  MODIFY `id_extras` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id_extras` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- AUTO_INCREMENT de la tabla `horario`

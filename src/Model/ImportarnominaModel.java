@@ -103,7 +103,7 @@ public class ImportarnominaModel extends database{
      conn = GetConnection();
         try {
             
-            ps = conn.prepareStatement("call Nomina_Individual(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)");
+            ps = conn.prepareStatement("call NominaIndividual(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)");
              ps.setString(1, id_empleado);
             ps.setInt(2, Integer.parseInt(nominaGeneral));
             ps.setString(3, total_indi);
