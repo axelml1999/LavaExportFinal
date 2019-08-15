@@ -97,7 +97,32 @@ public class ImportarnominaModel extends database{
 //           
 //            
 //     }
-        protected void insertarAsistencia(String idnomina, String dia1, String dia2, String dia3, String dia4, String dia5,
+        protected void NominaTotalProcedure(String id_empleado,String nominaGeneral,String total_indi, String dia1, String dia2, String dia3, String dia4, String dia5,
+             String dia6, String dia7) {
+        PreparedStatement ps = null;
+     conn = GetConnection();
+        try {
+            
+            ps = conn.prepareStatement("call NominaIndividual(?,?,?,?,?,?,?,?,?,?)");
+             ps.setString(1, id_empleado);
+            ps.setInt(2, Integer.parseInt(nominaGeneral));
+            ps.setString(3, total_indi);
+            ps.setString(4, dia1);
+            ps.setString(5, dia2);
+            ps.setString(6, dia3);
+            ps.setString(7, dia4);
+            ps.setString(8, dia5);
+            ps.setString(9, dia6);
+            ps.setString(10, dia7);
+          
+            ps.executeUpdate();
+        } catch (SQLException ex) {
+            Logger.getLogger(EmpleadoModel.class.getName()).log(Level.SEVERE, null, ex);
+        }
+       
+    }
+     
+     protected void insertarAsistencia(String idnomina, String dia1, String dia2, String dia3, String dia4, String dia5,
              String dia6, String dia7) {
         PreparedStatement ps = null;
      conn = GetConnection();
@@ -121,8 +146,40 @@ public class ImportarnominaModel extends database{
         DesktopNotify.showDesktopMessage("Asistencia Ingresada", "La asistencia ha sido registrada con exito", DesktopNotify.SUCCESS);
        
     }
-        
-        
+         protected void insertar_descuentos(String idnomina, String id_descuento, Double cantidad) {
+        PreparedStatement ps = null;
+     conn = GetConnection();
+        try {
+            
+            ps = conn.prepareStatement("insert into r_desc_nom_i(id_nomina_individual,id_descuento,cantidad)"
+                    + "values(?,?,?)");
+         ps.setInt(1, Integer.parseInt(idnomina));
+            ps.setInt(2, Integer.parseInt(id_descuento));
+            ps.setDouble(3,cantidad);
+              
+            ps.executeUpdate();
+        } catch (SQLException ex) {
+            Logger.getLogger(EmpleadoModel.class.getName()).log(Level.SEVERE, null, ex);
+        }
+       
+    }   
+             protected void insertar_Extra(String idnomina, String id_extra,Double cantidad) {
+        PreparedStatement ps = null;
+     conn = GetConnection();
+        try {
+            
+            ps = conn.prepareStatement("insert into r_extrasnom_i(id_nomina_individual,id_extras,cantidad)"
+                    + "values(?,?,?)");
+            ps.setInt(1, Integer.parseInt(idnomina));
+            ps.setInt(2, Integer.parseInt(id_extra));
+            ps.setDouble(3,cantidad);
+              
+            ps.executeUpdate();
+        } catch (SQLException ex) {
+            Logger.getLogger(EmpleadoModel.class.getName()).log(Level.SEVERE, null, ex);
+        }
+       
+    }    
        
         
 }

@@ -32,7 +32,16 @@ public class DescuentoModel extends database {
         return rs;
 
     }
+  protected ResultSet consultarDescuento_id(String descripcion) {
+        ResultSet rs = Read("select * from descuento where descripcion_descuento='"+descripcion+"'");
+        return rs;
 
+    }
+    protected ResultSet consultarDescuento_descripcion(String id) {
+        ResultSet rs = Read("select * from descuento where id_descuento="+id+"");
+        return rs;
+
+    }
     protected void insertarDescuento(String nombre) {
         PreparedStatement ps = null;
         conn = GetConnection();
