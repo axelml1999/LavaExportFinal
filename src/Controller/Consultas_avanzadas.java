@@ -18,7 +18,7 @@ import javax.swing.table.DefaultTableModel;
  */
 public class Consultas_avanzadas extends ConsultasModel {
 
-    public DefaultTableModel tablaCargos() {
+    public DefaultTableModel tablaNominas() {
         String[] titulos = {"Nomina", "Año", "Desde", "Hasta", "Extra", "Descuentos", "Total"};
         DefaultTableModel tb = new DefaultTableModel(null, titulos);
         Object[] fila = new Object[7];
@@ -27,11 +27,11 @@ public class Consultas_avanzadas extends ConsultasModel {
             while (rs.next()) {
                 fila[0] = rs.getInt("semana");
                 fila[1] = rs.getString("anio");
-                fila[2] = rs.getInt("fecha_inicio");
+                fila[2] = rs.getString("fecha_inicio");
                 fila[3] = rs.getString("fecha_fin");
-                fila[4] = rs.getInt("total_extras");
-                fila[5] = rs.getString("total_desc");
-                fila[6] = rs.getInt("total_nom");
+                fila[4] = rs.getDouble("total_extras");
+                fila[5] = rs.getDouble("total_desc");
+                fila[6] = rs.getDouble("total_nom");
                 
                 tb.addRow(fila);
             }

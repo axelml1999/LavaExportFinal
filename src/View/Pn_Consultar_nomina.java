@@ -5,16 +5,18 @@
  */
 package View;
 
+import Controller.Consultas_avanzadas;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
  * @author Joel
  */
 public class Pn_Consultar_nomina extends javax.swing.JPanel {
-
+Controller.Consultas_avanzadas ca=new Consultas_avanzadas();
     /**
      * Creates new form Pn_Consultar_nomina
      */
@@ -22,8 +24,12 @@ public class Pn_Consultar_nomina extends javax.swing.JPanel {
         initComponents();
         RowApariencia();
         RowHeaderApariencia();
+        Cargar_tabla();
     }
-
+public void Cargar_tabla(){
+    DefaultTableModel md=    ca.tablaNominas();
+    jTable1.setModel(md);
+}
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -60,6 +66,11 @@ public class Pn_Consultar_nomina extends javax.swing.JPanel {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
+        jTable1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jTable1MouseClicked(evt);
+            }
+        });
         jScrollPane1.setViewportView(jTable1);
 
         jSeparator5.setBackground(new java.awt.Color(128, 128, 131));
@@ -96,18 +107,17 @@ public class Pn_Consultar_nomina extends javax.swing.JPanel {
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(319, 319, 319)
-                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 56, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jSeparator5)
-                            .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(18, 18, 18)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 855, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(46, Short.MAX_VALUE))
+                .addGap(319, 319, 319)
+                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 56, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jSeparator5)
+                    .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(360, Short.MAX_VALUE))
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(18, 18, 18)
+                .addComponent(jScrollPane1)
+                .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -222,6 +232,12 @@ public class Pn_Consultar_nomina extends javax.swing.JPanel {
         // TODO add your handling code here:
         //filtro(jTextField1.getText());
     }//GEN-LAST:event_jTextField2KeyTyped
+
+    private void jTable1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable1MouseClicked
+int filasel=jTable1.getSelectedRow();
+
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTable1MouseClicked
 public void RowApariencia() {
         jTable1.setFocusable(false);
         jTable2.setFocusable(false);

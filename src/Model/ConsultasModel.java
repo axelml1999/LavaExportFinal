@@ -21,7 +21,7 @@ public class ConsultasModel extends DB.database{
     }
     
     protected ResultSet Consultar_nominas(){
-        ResultSet rs= Read("select * from nomina_general order by id_nomina");
+        ResultSet rs= Read("select * from nomina_general order by id_nomina_general");
         return rs;
     }
     protected ResultSet Consultar_nominas_individual(String id_nomina){
