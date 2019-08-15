@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 15-08-2019 a las 04:24:27
+-- Tiempo de generación: 15-08-2019 a las 04:50:49
 -- Versión del servidor: 5.7.24
 -- Versión de PHP: 7.2.19
 
@@ -250,7 +250,6 @@ CREATE TABLE `descuento` (
 --
 
 INSERT INTO `descuento` (`id_descuento`, `descripcion_descuento`) VALUES
-(2, 'Prestamo'),
 (3, 'Retardos'),
 (4, 'Otros Descuentos'),
 (5, 'Pantalones'),
@@ -306,8 +305,6 @@ CREATE TABLE `extras` (
 --
 
 INSERT INTO `extras` (`id_extras`, `descripcion_extras`) VALUES
-(1, 'horas extras'),
-(2, 'dias festivos'),
 (3, 'Produccion'),
 (4, 'Velada'),
 (5, 'Viajes'),
