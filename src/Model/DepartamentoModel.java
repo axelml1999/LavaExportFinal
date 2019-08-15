@@ -31,21 +31,19 @@ public class DepartamentoModel extends database {
         return rs;
 
     }
-    
-    //Modificamos-------------------------------------------------------------------------
-    
-    protected ResultSet consultarAreaPorIdDepartamento(String descripcion){
-        ResultSet rs = Read("select * from departamento where area='"+descripcion+"'");
-        return rs;
-    }
-    
-    protected ResultSet consultarDepartamentoPorIdDepartamento(String id_departamento){
-        ResultSet rs = Read("select * from departamento where id_departamento="+id_departamento);
-        return rs;
-    }
-    
-    //------------------------------------------------------------------------------------
 
+    //Modificamos-------------------------------------------------------------------------
+    protected ResultSet consultarAreaPorIdDepartamento(String descripcion) {
+        ResultSet rs = Read("select * from departamento where area='" + descripcion + "'");
+        return rs;
+    }
+
+    protected ResultSet consultarDepartamentoPorIdDepartamento(String id_departamento) {
+        ResultSet rs = Read("select * from departamento where id_departamento=" + id_departamento);
+        return rs;
+    }
+
+    //------------------------------------------------------------------------------------
     protected void insertarDepartamento(String nombre, int capacidad) {
         PreparedStatement ps = null;
         conn = GetConnection();
@@ -73,23 +71,30 @@ public class DepartamentoModel extends database {
 
             Logger.getLogger(DepartamentoModel.class.getName()).log(Level.SEVERE, null, ex);
         }
-       DesktopNotify.showDesktopMessage("Registro Actualizado", "El departamento ha sido actualizado con exito", DesktopNotify.SUCCESS);
+        DesktopNotify.showDesktopMessage("Registro Actualizado", "El departamento ha sido actualizado con exito", DesktopNotify.SUCCESS);
     }
 
     protected void eliminarDepartamento(int id) {
-       PreparedStatement ps = null;
+        PreparedStatement ps = null;
         conn = GetConnection();
+        int rowAffected = 0;
+
         try {
             ps = conn.prepareStatement("call eliminarDepartamento(?)");
 
             ps.setInt(1, id);
-            ps.executeUpdate();
+            rowAffected = ps.executeUpdate();
+
         } catch (SQLException ex) {
 
             Logger.getLogger(DepartamentoModel.class.getName()).log(Level.SEVERE, null, ex);
-            DesktopNotify.showDesktopMessage("ERROR", "No se puede eliminar un registro ligado con otra tabla", DesktopNotify.ERROR);
         }
-        DesktopNotify.showDesktopMessage("Registro Eliminado", "El departamento ha sido eliminado con exito", DesktopNotify.FAIL);
+        if (rowAffected == 1) {
+            DesktopNotify.showDesktopMessage("Registro Eliminado", "El departamento ha sido eliminado con exito", DesktopNotify.FAIL);
+        } else {
+            DesktopNotify.showDesktopMessage("ERROR", "No puedes eliminar un registro ligado con otra tabla", DesktopNotify.ERROR);
+        }
+
     }
 
 }

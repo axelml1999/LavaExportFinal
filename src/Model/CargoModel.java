@@ -72,16 +72,22 @@ public class CargoModel  extends database{
    protected void eliminarCargo(int id){
        PreparedStatement ps = null;
        conn = GetConnection();
+       int rowAffected = 0;
         try {
             ps = conn.prepareStatement("call eliminarCargo(?)");
             
             ps.setInt(1, id);
-            ps.executeUpdate();
+            rowAffected = ps.executeUpdate();
         } catch (SQLException ex) {
             
             Logger.getLogger(CargoModel.class.getName()).log(Level.SEVERE, null, ex);
         }
-        DesktopNotify.showDesktopMessage("Registro Eliminado", "El cargo ha sido eliminado con exito", DesktopNotify.FAIL);
+         if (rowAffected == 1) {
+            DesktopNotify.showDesktopMessage("Registro Eliminado", "El cargo ha sido eliminado con exito", DesktopNotify.FAIL);
+        } else {
+            DesktopNotify.showDesktopMessage("ERROR", "No puedes eliminar un registro ligado con otra tabla", DesktopNotify.ERROR);
+        }
+        
    }
     
 }

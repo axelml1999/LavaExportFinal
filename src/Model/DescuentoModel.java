@@ -73,15 +73,21 @@ public class DescuentoModel extends database {
     protected void eliminarDescuento(int id) {
         PreparedStatement ps = null;
         conn = GetConnection();
+        int rowAffected = 0;
         try {
             ps = conn.prepareStatement("call eliminarDescuento(?)");
 
             ps.setInt(1, id);
-            ps.executeUpdate();
+             rowAffected = ps.executeUpdate();
         } catch (SQLException ex) {
 
             Logger.getLogger(DescuentoModel.class.getName()).log(Level.SEVERE, null, ex);
         }
-        DesktopNotify.showDesktopMessage("Registro Eliminado", "El descuento ha sido eliminado con exito", DesktopNotify.FAIL);
+         if (rowAffected == 1) {
+            DesktopNotify.showDesktopMessage("Registro Eliminado", "El descuento ha sido eliminado con exito", DesktopNotify.FAIL);
+        } else {
+            DesktopNotify.showDesktopMessage("ERROR", "No puedes eliminar un registro ligado con otra tabla", DesktopNotify.ERROR);
+        }
+        
     }
 }

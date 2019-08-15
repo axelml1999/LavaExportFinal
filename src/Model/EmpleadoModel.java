@@ -109,16 +109,23 @@ public class EmpleadoModel extends database {
     protected void eliminarEmpleado(String id_empleado){
        PreparedStatement ps = null;
        conn = GetConnection();
+       int rowAffected = 0;
         try {
             ps = conn.prepareStatement("delete from empleado where id_empleado=?");
             
             ps.setString(1, id_empleado);
-            ps.executeUpdate();
+            rowAffected = ps.executeUpdate();
         } catch (SQLException ex) {
             
             Logger.getLogger(EmpleadoModel.class.getName()).log(Level.SEVERE, null, ex);
         }
-        DesktopNotify.showDesktopMessage("Registro Eliminado", "El empleado ha sido eliminado con exito", DesktopNotify.FAIL);
+        
+        if (rowAffected == 1) {
+            DesktopNotify.showDesktopMessage("Registro Eliminado", "El empleado ha sido eliminado con exito", DesktopNotify.FAIL);
+        } else {
+            DesktopNotify.showDesktopMessage("ERROR", "No puedes eliminar un registro ligado con otra tabla", DesktopNotify.ERROR);
+        }
+        
    }
 
 }

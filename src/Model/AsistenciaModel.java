@@ -14,6 +14,10 @@ import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
+import ds.desktop.notify.DesktopNotify;
+import ds.desktop.notify.NotifyTheme;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 /**
  *
@@ -45,7 +49,7 @@ public class AsistenciaModel extends database {
         } catch (SQLException ex) {
             Logger.getLogger(AsistenciaModel.class.getName()).log(Level.SEVERE, null, ex);
         }
-        JOptionPane.showMessageDialog(null, "Registro Insertado");
+        DesktopNotify.showDesktopMessage("Registro Insertado", "La asistencia ha sido registrada con exito", DesktopNotify.SUCCESS);
     }
 
     protected void modificarAsistencia(int id, String dia1, String dia2, String dia3, String dia4, String dia5, String dia6, String dia7) {
@@ -66,21 +70,27 @@ public class AsistenciaModel extends database {
 
             Logger.getLogger(AsistenciaModel.class.getName()).log(Level.SEVERE, null, ex);
         }
-        JOptionPane.showMessageDialog(null, "Registro Actualizado");
+         DesktopNotify.showDesktopMessage("Registro Actualizado", "La asistencia ha sido actualizada con exito", DesktopNotify.SUCCESS);
     }
 
     protected void eliminarAsistencia(int id) {
         PreparedStatement ps = null;
         conn = GetConnection();
+        int rowAffected = 0;
         try {
             ps = conn.prepareStatement("delete from asistencia where id_asistencia=?");
 
             ps.setInt(1, id);
-            ps.executeUpdate();
+            rowAffected = ps.executeUpdate();
         } catch (SQLException ex) {
 
             Logger.getLogger(AsistenciaModel.class.getName()).log(Level.SEVERE, null, ex);
         }
-        JOptionPane.showMessageDialog(null, "Registro Eliminado");
+        if (rowAffected == 1) {
+            DesktopNotify.showDesktopMessage("Registro Eliminado", "La asistencia ha sido eliminada con exito", DesktopNotify.FAIL);
+        } else {
+            DesktopNotify.showDesktopMessage("ERROR", "No puedes eliminar un registro ligado con otra tabla", DesktopNotify.ERROR);
+        }
+         
     }
 }
