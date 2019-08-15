@@ -39,7 +39,7 @@ public class Principal extends javax.swing.JFrame implements Runnable {
     public Principal() {
         setPantalla();
         initComponents();
-        full_Screen();
+      //  full_Screen();
         centrarPantalla();
         execute();
         mostrarFecha();
@@ -85,7 +85,6 @@ NoScrollBar();
         jLabel5 = new javax.swing.JLabel();
         jl_Icon_User = new javax.swing.JLabel();
         bt_acerdaDe = new Utilerias.RSButtonMetro();
-        bt_cerrarSesion = new Utilerias.RSButtonMetro();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -121,7 +120,7 @@ NoScrollBar();
         lb_usuario.setBackground(new java.awt.Color(255, 255, 255));
         lb_usuario.setFont(new java.awt.Font("Century Gothic", 0, 14)); // NOI18N
         lb_usuario.setForeground(new java.awt.Color(204, 204, 204));
-        lb_usuario.setText("Sebastian Rocha Ortega");
+        lb_usuario.setText("Administrador");
 
         jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/leaf.png"))); // NOI18N
 
@@ -136,7 +135,7 @@ NoScrollBar();
                 .addComponent(jLabel1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jLabel2)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 774, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 851, Short.MAX_VALUE)
                 .addComponent(lb_status)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel3)
@@ -308,15 +307,6 @@ NoScrollBar();
             }
         });
 
-        bt_cerrarSesion.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/exit32x32.png"))); // NOI18N
-        bt_cerrarSesion.setText("Cerrar Sesión");
-        bt_cerrarSesion.setIconTextGap(20);
-        bt_cerrarSesion.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                bt_cerrarSesionActionPerformed(evt);
-            }
-        });
-
         javax.swing.GroupLayout panelMenuLayout = new javax.swing.GroupLayout(panelMenu);
         panelMenu.setLayout(panelMenuLayout);
         panelMenuLayout.setHorizontalGroup(
@@ -324,9 +314,7 @@ NoScrollBar();
             .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelMenuLayout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(panelMenuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(bt_acerdaDe, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(bt_cerrarSesion, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addComponent(bt_acerdaDe, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addContainerGap())
             .addComponent(scroll_Menu)
         );
@@ -336,11 +324,9 @@ NoScrollBar();
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(scroll_Menu, javax.swing.GroupLayout.DEFAULT_SIZE, 334, Short.MAX_VALUE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGap(45, 45, 45)
                 .addComponent(bt_acerdaDe, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(bt_cerrarSesion, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
+                .addGap(24, 24, 24))
         );
 
         getContentPane().add(panelMenu, java.awt.BorderLayout.LINE_START);
@@ -506,13 +492,12 @@ NoScrollBar();
 
     }
 
-    public void full_Screen() {
-        Toolkit tk = Toolkit.getDefaultToolkit();
-        int xsize = (int) tk.getScreenSize().getWidth();
-        int ysize = (int) tk.getScreenSize().getHeight();
-        this.setSize(xsize, ysize);
+  //  public void full_Screen() {
+     //   Toolkit tk = Toolkit.getDefaultToolkit();
+//        int ysize = (int) tk.getScreenSize().getHeight();
+     //   this.setSize(xsize, ysize);
 
-    }
+    //}
 
     public void run() {
         // Thread current= Thread.currentThread();
@@ -574,15 +559,6 @@ NoScrollBar();
         // TODO add your handling code here:
     }//GEN-LAST:event_bt_acerdaDeActionPerformed
 
-    private void bt_cerrarSesionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bt_cerrarSesionActionPerformed
-        Alert_CerrarSesion sesion = new Alert_CerrarSesion(this, true);
-        String texto = "¿Qué desea realizar?";
-        sesion.lb_titulo_sesion.setText(texto);
-        sesion.setVisible(true);
-
-// TODO add your handling code here:
-    }//GEN-LAST:event_bt_cerrarSesionActionPerformed
-
     /**
      * @param args the command line arguments
      */
@@ -621,7 +597,6 @@ NoScrollBar();
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private Utilerias.RSButtonMetro bt_acerdaDe;
-    private Utilerias.RSButtonMetro bt_cerrarSesion;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;

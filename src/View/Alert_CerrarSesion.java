@@ -6,6 +6,7 @@
 package View;
 
 import Utilerias.AWTUtilities;
+import java.awt.Toolkit;
 import java.util.TimerTask;
 import java.util.Timer;
 import javax.swing.JFrame;
@@ -43,7 +44,6 @@ public class Alert_CerrarSesion extends javax.swing.JDialog {
         jLabel1 = new javax.swing.JLabel();
         lb_titulo_sesion = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
-        materialButton1 = new principal.MaterialButton();
         materialButton2 = new principal.MaterialButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
@@ -72,17 +72,6 @@ public class Alert_CerrarSesion extends javax.swing.JDialog {
 
         jPanel2.setBackground(new java.awt.Color(36, 47, 65));
 
-        materialButton1.setBackground(new java.awt.Color(97, 212, 195));
-        materialButton1.setForeground(new java.awt.Color(255, 255, 255));
-        materialButton1.setText("Cambiar usuario");
-        materialButton1.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        materialButton1.setFont(new java.awt.Font("Roboto Medium", 1, 14)); // NOI18N
-        materialButton1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                materialButton1ActionPerformed(evt);
-            }
-        });
-
         materialButton2.setBackground(new java.awt.Color(97, 212, 195));
         materialButton2.setForeground(new java.awt.Color(255, 255, 255));
         materialButton2.setText("Cerrar Sesión");
@@ -99,26 +88,16 @@ public class Alert_CerrarSesion extends javax.swing.JDialog {
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                .addContainerGap(181, Short.MAX_VALUE)
-                .addComponent(materialButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 171, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18))
-            .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(jPanel2Layout.createSequentialGroup()
-                    .addContainerGap()
-                    .addComponent(materialButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 168, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addContainerGap(192, Short.MAX_VALUE)))
+                .addContainerGap(105, Short.MAX_VALUE)
+                .addComponent(materialButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 168, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(97, 97, 97))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(materialButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(materialButton2, javax.swing.GroupLayout.DEFAULT_SIZE, 38, Short.MAX_VALUE)
                 .addContainerGap())
-            .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(jPanel2Layout.createSequentialGroup()
-                    .addContainerGap()
-                    .addComponent(materialButton2, javax.swing.GroupLayout.DEFAULT_SIZE, 38, Short.MAX_VALUE)
-                    .addContainerGap()))
         );
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
@@ -160,10 +139,6 @@ public class Alert_CerrarSesion extends javax.swing.JDialog {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void materialButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_materialButton1ActionPerformed
-        this.dispose();
-    }//GEN-LAST:event_materialButton1ActionPerformed
-
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
         task = new TimerTask() {
             @Override
@@ -188,6 +163,7 @@ public class Alert_CerrarSesion extends javax.swing.JDialog {
 
     private void materialButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_materialButton2ActionPerformed
         // TODO add your handling code here:
+        System.exit(0);
     }//GEN-LAST:event_materialButton2ActionPerformed
 
     /**
@@ -300,7 +276,6 @@ public class Alert_CerrarSesion extends javax.swing.JDialog {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     public javax.swing.JLabel lb_titulo_sesion;
-    private principal.MaterialButton materialButton1;
     private principal.MaterialButton materialButton2;
     // End of variables declaration//GEN-END:variables
 
@@ -314,7 +289,12 @@ public class Alert_CerrarSesion extends javax.swing.JDialog {
         AWTUtilities.setOpacity(this, trasp);
     }
 
+    
     private void Ubicar(int y) {
-        this.setLocation(550, y - 120);
+        
+        Toolkit tk = Toolkit.getDefaultToolkit();
+        int xsize = (int) tk.getScreenSize().getWidth()/2;
+        this.setLocation(xsize, y - 120);
+        
     }
 }

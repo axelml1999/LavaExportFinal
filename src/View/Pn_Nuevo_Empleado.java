@@ -1633,7 +1633,7 @@ public class Pn_Nuevo_Empleado  extends javax.swing.JPanel {
         jScrollPane1.setViewportView(jt_empleados);
 
         t_empleado.setForeground(new java.awt.Color(153, 153, 153));
-        t_empleado.setText("Ingrese Nombre de Empleado");
+        t_empleado.setText("Ingrese Nombre del Empleado");
         t_empleado.setBorder(null);
         t_empleado.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusLost(java.awt.event.FocusEvent evt) {
@@ -2357,7 +2357,7 @@ public class Pn_Nuevo_Empleado  extends javax.swing.JPanel {
 
     private void t_empleadoFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_t_empleadoFocusLost
         if (t_empleado.getText().trim().equals("")) {
-            t_empleado.setText("Ingrese Número de Empleado");
+            t_empleado.setText("Ingrese Nombre del Empleado");
             t_empleado.setForeground(new Color(153, 153, 153));
 
         }

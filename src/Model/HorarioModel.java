@@ -14,6 +14,10 @@ import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
+import ds.desktop.notify.DesktopNotify;
+import ds.desktop.notify.NotifyTheme;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 /**
  *
@@ -24,7 +28,7 @@ public class HorarioModel extends database{
      Connection conn;
     
     protected ResultSet consultarHorarios(){
-       ResultSet rs = Read("select * from horario");
+       ResultSet rs = Read("call consultarHorario");
        return rs;
     }
     
@@ -32,7 +36,7 @@ public class HorarioModel extends database{
        PreparedStatement ps = null;
        conn = GetConnection();
         try {
-            ps = conn.prepareStatement("insert into horario(hora_llegada,hora_salida,turno) values(?,?,?)");
+            ps = conn.prepareStatement("call insertarHorario(?,?,?)");
             ps.setString(1, h_entrada);
             ps.setString(2, h_salida);
             ps.setString(3, turno);
@@ -42,14 +46,14 @@ public class HorarioModel extends database{
         } catch (SQLException ex) {
             Logger.getLogger(HorarioModel.class.getName()).log(Level.SEVERE, null, ex);
         }
-        JOptionPane.showMessageDialog(null, "Registro Insertado");
+        DesktopNotify.showDesktopMessage("Registro Insertado", "El horario ha sido registrado con exito", DesktopNotify.SUCCESS);
     }
     
      protected void modificarHorario(int id,String h_entrada, String h_salida, String turno){
        PreparedStatement ps = null;
        conn = GetConnection();
         try {
-            ps = conn.prepareStatement("update horario set hora_llegada=?, hora_salida=?, turno=? where id_horario=?");
+            ps = conn.prepareStatement("call modificarHorario(?,?,?,?)");
             ps.setString(1, h_entrada);
             ps.setString(2, h_salida);
             ps.setString(3, turno);
@@ -59,14 +63,14 @@ public class HorarioModel extends database{
             
             Logger.getLogger(HorarioModel.class.getName()).log(Level.SEVERE, null, ex);
         }
-        JOptionPane.showMessageDialog(null, "Registro Actualizado");
+        DesktopNotify.showDesktopMessage("Registro Actualizado", "El horario ha sido actualizado con exito", DesktopNotify.SUCCESS);
    }
    
    protected void eliminarHorario(int id){
        PreparedStatement ps = null;
        conn = GetConnection();
         try {
-            ps = conn.prepareStatement("delete from horario where id_horario=?");
+            ps = conn.prepareStatement("call eliminarHorario(?)");
             
             ps.setInt(1, id);
             ps.executeUpdate();
@@ -75,7 +79,7 @@ public class HorarioModel extends database{
             Logger.getLogger(HorarioModel.class.getName()).log(Level.SEVERE, null, ex);
             JOptionPane.showMessageDialog(null, "No se puede eliminar un registro ligado a otra tabla");
         }
-        JOptionPane.showMessageDialog(null, "Registro Eliminado");
+        DesktopNotify.showDesktopMessage("Registro Eliminado", "El horario ha sido eliminado con exito", DesktopNotify.FAIL);
    }
    
    protected ResultSet consultarTurnoPorIdHorario(String turno){

@@ -13,8 +13,11 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import ds.desktop.notify.DesktopNotify;
+import ds.desktop.notify.NotifyTheme;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import javax.swing.JOptionPane;
-
 /**
  *
  * @author axeli
@@ -24,7 +27,7 @@ public class CargoModel  extends database{
      Connection conn;
     
     protected ResultSet consultarCargos(){
-       ResultSet rs = Read("select * from cargo");
+       ResultSet rs = Read("call consultarCargo");
        return rs;
     }
     
@@ -42,20 +45,20 @@ public class CargoModel  extends database{
        PreparedStatement ps = null;
        conn = GetConnection();
         try {
-            ps = conn.prepareStatement("insert into cargo(descripcion_cargo) values(?)");
+            ps = conn.prepareStatement("call insertarCargo(?)");
             ps.setString(1, descripcion);
             ps.executeUpdate();
         } catch (SQLException ex) {
             Logger.getLogger(CargoModel.class.getName()).log(Level.SEVERE, null, ex);
         }
-        JOptionPane.showMessageDialog(null, "Registro Insertado");
+        DesktopNotify.showDesktopMessage("Registro Insertado", "El cargo ha sido registrado con exito", DesktopNotify.SUCCESS);
     }
     
      protected void modificarCargo(int id,String descripcion){
        PreparedStatement ps = null;
        conn = GetConnection();
         try {
-            ps = conn.prepareStatement("update cargo set descripcion_cargo=? where id_cargo=?");
+            ps = conn.prepareStatement("call modificarCargo(?,?)");
             ps.setString(1, descripcion);
             ps.setInt(2, id);
             ps.executeUpdate();
@@ -63,14 +66,14 @@ public class CargoModel  extends database{
             
             Logger.getLogger(CargoModel.class.getName()).log(Level.SEVERE, null, ex);
         }
-        JOptionPane.showMessageDialog(null, "Registro Actualizado");
+        DesktopNotify.showDesktopMessage("Registro Actualizado", "El cargo ha sido actualizado con exito", DesktopNotify.SUCCESS);
    }
    
    protected void eliminarCargo(int id){
        PreparedStatement ps = null;
        conn = GetConnection();
         try {
-            ps = conn.prepareStatement("delete from cargo where id_cargo=?");
+            ps = conn.prepareStatement("call eliminarCargo(?)");
             
             ps.setInt(1, id);
             ps.executeUpdate();
@@ -78,7 +81,7 @@ public class CargoModel  extends database{
             
             Logger.getLogger(CargoModel.class.getName()).log(Level.SEVERE, null, ex);
         }
-        JOptionPane.showMessageDialog(null, "Registro Eliminado");
+        DesktopNotify.showDesktopMessage("Registro Eliminado", "El cargo ha sido eliminado con exito", DesktopNotify.FAIL);
    }
     
 }

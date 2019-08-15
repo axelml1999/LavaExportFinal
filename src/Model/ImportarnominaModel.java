@@ -15,6 +15,10 @@ import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
+import ds.desktop.notify.DesktopNotify;
+import ds.desktop.notify.NotifyTheme;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 /**
  *
@@ -44,7 +48,7 @@ public class ImportarnominaModel extends database{
         } catch (SQLException ex) {
             Logger.getLogger(EmpleadoModel.class.getName()).log(Level.SEVERE, null, ex);
         }
-        JOptionPane.showMessageDialog(null, "Nomina Registrada");
+        DesktopNotify.showDesktopMessage("Nomina Ingresada", "La nomina ha sido registrada con exito", DesktopNotify.SUCCESS);
     }
      
      protected ResultSet consultar_id_nomina(){
@@ -72,6 +76,7 @@ public class ImportarnominaModel extends database{
         } catch (SQLException ex) {
             Logger.getLogger(EmpleadoModel.class.getName()).log(Level.SEVERE, null, ex);
         }
+          DesktopNotify.showDesktopMessage("Nomina Individual Ingresada", "La nomina individual ha sido registrada con exito", DesktopNotify.SUCCESS);
            
             
      }
@@ -138,6 +143,7 @@ public class ImportarnominaModel extends database{
         } catch (SQLException ex) {
             Logger.getLogger(EmpleadoModel.class.getName()).log(Level.SEVERE, null, ex);
         }
+        DesktopNotify.showDesktopMessage("Asistencia Ingresada", "La asistencia ha sido registrada con exito", DesktopNotify.SUCCESS);
        
     }
          protected void insertar_descuentos(String idnomina, String id_descuento, Double cantidad) {
