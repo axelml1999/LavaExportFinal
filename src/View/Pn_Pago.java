@@ -72,7 +72,6 @@ public class Pn_Pago extends javax.swing.JPanel {
         t_numEmpleado.setEnabled(false);
         bt_agregar.setEnabled(false);
         bt_cancelar.setEnabled(false);
-        t_banco.setEnabled(false);
         bt_eliminar.setEnabled(false);
         jTab_Usuarios.setSelectedIndex(0);
     }
@@ -102,10 +101,9 @@ public class Pn_Pago extends javax.swing.JPanel {
         t_cuenta.setEnabled(true);
         t_tarjeta.setEnabled(true);
         t_descripcion.setEnabled(true);
-        bt_nuevo.setEnabled(false);
+        bt_nuevo.setEnabled(true);
         bt_agregar.setEnabled(true);
         bt_cancelar.setEnabled(true);
-        t_banco.setEnabled(true);
         bt_eliminar.setEnabled(true);
         jTab_Usuarios.setSelectedIndex(1);
         bt_agregar.setText("Actualizar");
@@ -118,7 +116,6 @@ public class Pn_Pago extends javax.swing.JPanel {
         t_descripcion.setEditable(false);
         t_nomEmpleado.setEditable(false);
         t_numEmpleado.setEditable(false);
-        t_banco.setEditable(false);
         
     }
     
@@ -129,7 +126,6 @@ public class Pn_Pago extends javax.swing.JPanel {
         t_descripcion.setEditable(true);
         t_nomEmpleado.setEditable(true);
         t_numEmpleado.setEditable(true);
-        t_banco.setEditable(true);
     }
     
     public void limpiarCampos() {
@@ -137,9 +133,7 @@ public class Pn_Pago extends javax.swing.JPanel {
         t_cuenta.setText("Ingresar Número de Cuenta");
         t_tarjeta.setText("Ingresar Número de Tarjeta");
         t_descripcion.setText("Ingresar Descripción");
-        t_nomEmpleado.setText("Ingrese Nombre de Empleado");
-        t_numEmpleado.setText("Ingrese Número de Empleado");
-        t_banco.setText("Ingresar Sucursal Bancaria");
+        
         
     }
 
@@ -196,16 +190,7 @@ public class Pn_Pago extends javax.swing.JPanel {
 
             val = false;*/
         {
-            if (!(t_banco.getText().equals("Ingresar Sucursal Bancaria")) && !(t_banco.getText().equals(""))) {
-                t_banco.setBorder(null);
-                lb_errorBanco.setText("");
-            } else {
-                
-                t_banco.setBorder(new LineBorder(Color.RED, 1));
-                lb_errorBanco.setText("Ingrese un Nombre de Banco válido");
-                
-                val = false;
-            }
+            
         }
         return val;
     }
@@ -270,7 +255,6 @@ private void filtro(String consulta, JTable jtableBuscar){
         jLabel25 = new javax.swing.JLabel();
         jLabel23 = new javax.swing.JLabel();
         Jp_usuarios = new javax.swing.JPanel();
-        jLabel17 = new javax.swing.JLabel();
         jLabel22 = new javax.swing.JLabel();
         bt_nuevo = new Utilerias.RSButtonMetro();
         bt_agregar = new Utilerias.RSButtonMetro();
@@ -280,7 +264,6 @@ private void filtro(String consulta, JTable jtableBuscar){
         jLabel19 = new javax.swing.JLabel();
         t_cuenta = new javax.swing.JTextField();
         jSeparator8 = new javax.swing.JSeparator();
-        jSeparator14 = new javax.swing.JSeparator();
         jSeparator15 = new javax.swing.JSeparator();
         jPanel3 = new javax.swing.JPanel();
         jLabel24 = new javax.swing.JLabel();
@@ -298,7 +281,6 @@ private void filtro(String consulta, JTable jtableBuscar){
         lb_errorNombre = new javax.swing.JLabel();
         lb_errorNumero = new javax.swing.JLabel();
         jLabel18 = new javax.swing.JLabel();
-        t_banco = new javax.swing.JTextField();
         jSeparator18 = new javax.swing.JSeparator();
         lb_errorBanco = new javax.swing.JLabel();
 
@@ -432,12 +414,6 @@ private void filtro(String consulta, JTable jtableBuscar){
 
         Jp_usuarios.setBackground(new java.awt.Color(255, 255, 255));
         Jp_usuarios.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
-        jLabel17.setFont(new java.awt.Font("Century Gothic", 1, 14)); // NOI18N
-        jLabel17.setForeground(new java.awt.Color(128, 128, 131));
-        jLabel17.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-        jLabel17.setText("Sucursal Bancaria");
-        Jp_usuarios.add(jLabel17, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 430, 170, -1));
 
         jLabel22.setFont(new java.awt.Font("Century Gothic", 1, 14)); // NOI18N
         jLabel22.setForeground(new java.awt.Color(128, 128, 131));
@@ -601,9 +577,6 @@ private void filtro(String consulta, JTable jtableBuscar){
         jSeparator8.setBackground(new java.awt.Color(128, 128, 131));
         Jp_usuarios.add(jSeparator8, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 300, 182, 10));
 
-        jSeparator14.setBackground(new java.awt.Color(128, 128, 131));
-        Jp_usuarios.add(jSeparator14, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 450, 182, 10));
-
         jSeparator15.setBackground(new java.awt.Color(128, 128, 131));
         Jp_usuarios.add(jSeparator15, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 110, 182, 10));
 
@@ -732,31 +705,6 @@ private void filtro(String consulta, JTable jtableBuscar){
         jLabel18.setText("Descripción de pago");
         Jp_usuarios.add(jLabel18, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 350, 170, -1));
 
-        t_banco.setForeground(new java.awt.Color(153, 153, 153));
-        t_banco.setText("Ingresar Sucursal Bancaria");
-        t_banco.setBorder(null);
-        t_banco.addFocusListener(new java.awt.event.FocusAdapter() {
-            public void focusLost(java.awt.event.FocusEvent evt) {
-                t_bancoFocusLost(evt);
-            }
-        });
-        t_banco.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                t_bancoMouseClicked(evt);
-            }
-        });
-        t_banco.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                t_bancoActionPerformed(evt);
-            }
-        });
-        t_banco.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyTyped(java.awt.event.KeyEvent evt) {
-                t_bancoKeyTyped(evt);
-            }
-        });
-        Jp_usuarios.add(t_banco, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 430, 160, -1));
-
         jSeparator18.setBackground(new java.awt.Color(128, 128, 131));
         Jp_usuarios.add(jSeparator18, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 370, 182, 10));
         Jp_usuarios.add(lb_errorBanco, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 450, 180, 20));
@@ -799,10 +747,13 @@ private void filtro(String consulta, JTable jtableBuscar){
     private void bt_nuevoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bt_nuevoActionPerformed
         desbloquearComponentes();
         ComponenteEditable();
+        limpiarCampos();
 if(t_tarjeta.getText().equals("")||t_cuenta.getText().equals("")){
     accion="I";
+    bt_agregar.setText("Guardar");
 }else{
     accion="M";
+    bt_agregar.setText("Actualizar");
 }        
     }//GEN-LAST:event_bt_nuevoActionPerformed
 
@@ -1065,57 +1016,14 @@ if(t_tarjeta.getText().equals("")||t_cuenta.getText().equals("")){
         
     }//GEN-LAST:event_t_numEmpleadoKeyTyped
 
-    private void t_bancoFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_t_bancoFocusLost
-        if (t_banco.getText().trim().equals("")) {
-            t_banco.setText("Ingresar Sucursal Bancaria");
-            t_banco.setForeground(new Color(153, 153, 153));
-        }
-        // TODO add your handling code here:
-    }//GEN-LAST:event_t_bancoFocusLost
-
-    private void t_bancoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_t_bancoMouseClicked
-        if (!t_banco.getText().equals("Ingresar Sucursal Bancaria")) {
-            
-        } else {
-            t_banco.setText("");
-        }
-        // TODO add your handling code here:
-    }//GEN-LAST:event_t_bancoMouseClicked
-
-    private void t_bancoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_t_bancoActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_t_bancoActionPerformed
-
-    private void t_bancoKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_t_bancoKeyTyped
-        // TODO add your handling code here:
-        //variable de tipo char
-        char tecla;
-        tecla = evt.getKeyChar();
-        //Convertir a letras mayusculas
-        if (Character.isLetter(tecla)) {
-            evt.setKeyChar(Character.toUpperCase(tecla));
-            
-        }
-        //
-        if (!Character.isLetter(tecla) /*&& !Character.isDigit(tecla)*/ && tecla != KeyEvent.VK_SPACE && tecla != KeyEvent.VK_BACK_SPACE && tecla != KeyEvent.VK_ENTER && tecla != KeyEvent.VK_PERIOD) {
-            getToolkit().beep();
-            lb_errorBanco.setText("Solo se admiten letras");
-            evt.consume();
-            //para borrar el texto
-        } else {
-            lb_errorBanco.setText("");
-            t_banco.setBorder(null);
-        }        // TODO add your handling code here:
-    }//GEN-LAST:event_t_bancoKeyTyped
-
     private void jt_empleadosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jt_empleadosMouseClicked
-        
+        limpiarCampos();
         int filasel = jt_empleados.getSelectedRow();
         id_empleado=jt_empleados.getValueAt(filasel, 0).toString();
         nombre = jt_empleados.getValueAt(filasel, 1).toString();
         jTab_Usuarios.setSelectedIndex(1);
         cargar_datos(id_empleado);
-
+bt_nuevo.setEnabled(true);
         t_numEmpleado.setText(id_empleado);
         t_nomEmpleado.setText(nombre);
         cargar_datos(id_empleado);
@@ -1173,7 +1081,6 @@ if(t_tarjeta.getText().equals("")||t_cuenta.getText().equals("")){
     private Utilerias.RSButtonMetro bt_cancelar;
     private Utilerias.RSButtonMetro bt_eliminar;
     private Utilerias.RSButtonMetro bt_nuevo;
-    private javax.swing.JLabel jLabel17;
     private javax.swing.JLabel jLabel18;
     private javax.swing.JLabel jLabel19;
     private javax.swing.JLabel jLabel20;
@@ -1186,7 +1093,6 @@ if(t_tarjeta.getText().equals("")||t_cuenta.getText().equals("")){
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JSeparator jSeparator14;
     private javax.swing.JSeparator jSeparator15;
     private javax.swing.JSeparator jSeparator16;
     private javax.swing.JSeparator jSeparator17;
@@ -1202,7 +1108,6 @@ if(t_tarjeta.getText().equals("")||t_cuenta.getText().equals("")){
     private javax.swing.JLabel lb_errorNombre;
     private javax.swing.JLabel lb_errorNumero;
     private javax.swing.JLabel lb_errorTarjeta;
-    private javax.swing.JTextField t_banco;
     private javax.swing.JTextField t_cuenta;
     private javax.swing.JTextField t_descripcion;
     private javax.swing.JTextField t_empleado;

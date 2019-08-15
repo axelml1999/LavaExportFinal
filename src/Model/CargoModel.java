@@ -37,7 +37,7 @@ public class CargoModel  extends database{
     }
     
     protected ResultSet consultarAreaPorIdCargo(String id_cargo){
-        ResultSet rs = Read("select * from cargo where id_cargo="+id_cargo);
+        ResultSet rs = Read("select * from cargo where id_cargo="+id_cargo+"");
         return rs;
     }
     

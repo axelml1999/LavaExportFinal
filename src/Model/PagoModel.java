@@ -57,7 +57,7 @@ public class PagoModel  extends database {
             ps = conn.prepareStatement("update pago set  numero_cuenta=?,numero_tarjeta=?,descripcion_pago=? where id_empleado=?" );
    
             ps.setInt(1, Integer.parseInt(numero_cuenta));
-            ps.setInt(2, Integer.parseInt(numero_tarjeta));
+            ps.setString(2, (numero_tarjeta));
             ps.setString(3, descripcion_pago);
               ps.setInt(4, Integer.parseInt( id_empleado));
             ps.executeUpdate();

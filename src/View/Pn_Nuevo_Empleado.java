@@ -100,7 +100,7 @@ public class Pn_Nuevo_Empleado  extends javax.swing.JPanel {
         columnModel.getColumn(4).setPreferredWidth(180);
         columnModel.getColumn(5).setPreferredWidth(180);
         columnModel.getColumn(6).setPreferredWidth(180);
-        columnModel.getColumn(7).setPreferredWidth(100);
+ 
 
     }
     

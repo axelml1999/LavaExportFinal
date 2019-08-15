@@ -93,7 +93,7 @@ public class HorarioModel extends database {
     }
 
     protected ResultSet consultarHorarioPorIdHorario(String id_horario) {
-        ResultSet rs = Read("select * from horario where id_horario=" + id_horario);
+        ResultSet rs = Read("select * from horario where id_horario='" + id_horario + "'");
         return rs;
     }
 

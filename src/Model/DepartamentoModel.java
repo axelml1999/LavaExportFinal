@@ -39,7 +39,7 @@ public class DepartamentoModel extends database {
     }
 
     protected ResultSet consultarDepartamentoPorIdDepartamento(String id_departamento) {
-        ResultSet rs = Read("select * from departamento where id_departamento=" + id_departamento);
+        ResultSet rs = Read("select * from departamento where id_departamento='" + id_departamento + "'");
         return rs;
     }
 

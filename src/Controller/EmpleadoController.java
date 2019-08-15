@@ -52,7 +52,7 @@ public class EmpleadoController extends EmpleadoModel {
     
     public DefaultTableModel tablaEmpleado() {
 
-        String[] titulos = {"Id","Departamento","Nombre","Horario","Cargo","Fecha Nacimiento","Fecha Ingreso","Estatus"};
+        String[] titulos = {"Id","Departamento","Nombre","Horario","Fecha Nacimiento","Fecha Ingreso","Estatus"};
         DefaultTableModel tb = new DefaultTableModel(null, titulos);
         Object[] fila = new Object[8];
 
@@ -65,12 +65,12 @@ public class EmpleadoController extends EmpleadoModel {
                 
                 
                 fila[3] = hc.consultarIdHorarioController(rs.getString("id_horario"));
-                fila[4] = cc.consultarDescripcionCargoController(rs.getString("id_cargo"));
-                
+//                fila[4] = cc.consultarDescripcionCargoController(rs.getString("id_cargo"));
+                //System.out.println(rs.getString("id_cargo"));
 
-                fila[5] = rs.getString("fecha_nacimiento");
-                fila[6] = rs.getString("fecha_entrada");
-                fila[7] = consultarEstatus(rs.getString("estatus"));
+                fila[4] = rs.getString("fecha_nacimiento");
+                fila[5] = rs.getString("fecha_entrada");
+                fila[6] = consultarEstatus(rs.getString("estatus"));
                 tb.addRow(fila);
             }
         } catch (SQLException ex) {
