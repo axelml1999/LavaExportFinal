@@ -98,12 +98,12 @@ public class ImportarnominaModel extends database{
 //            
 //     }
         protected void NominaTotalProcedure(String id_empleado,String nominaGeneral,String total_indi, String dia1, String dia2, String dia3, String dia4, String dia5,
-             String dia6, String dia7) {
+             String dia6, String dia7,String produ,String velada,String viaje,String domingo,String vacaciones,String extra,String retardo,String otro_desc,String pantalon,String infonavit) {
         PreparedStatement ps = null;
      conn = GetConnection();
         try {
             
-            ps = conn.prepareStatement("call NominaIndividual(?,?,?,?,?,?,?,?,?,?)");
+            ps = conn.prepareStatement("call Nomina_Individual(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)");
              ps.setString(1, id_empleado);
             ps.setInt(2, Integer.parseInt(nominaGeneral));
             ps.setString(3, total_indi);
@@ -114,7 +114,17 @@ public class ImportarnominaModel extends database{
             ps.setString(8, dia5);
             ps.setString(9, dia6);
             ps.setString(10, dia7);
-          
+            
+            ps.setDouble(11, Double.parseDouble(produ));
+            ps.setDouble(12, Double.parseDouble(velada));
+            ps.setDouble(13, Double.parseDouble(viaje));
+            ps.setDouble(14, Double.parseDouble(domingo));
+            ps.setDouble(15, Double.parseDouble(vacaciones));
+            ps.setDouble(16, Double.parseDouble(extra));
+            ps.setDouble(17, Double.parseDouble(retardo));
+          ps.setDouble(18, Double.parseDouble(otro_desc));
+          ps.setDouble(19, Double.parseDouble(pantalon));
+          ps.setDouble(20, Double.parseDouble(infonavit));
             ps.executeUpdate();
         } catch (SQLException ex) {
             Logger.getLogger(EmpleadoModel.class.getName()).log(Level.SEVERE, null, ex);

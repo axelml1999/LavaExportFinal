@@ -53,9 +53,9 @@ public class ImportarnominaController  extends ImportarnominaModel{
      insertarAsistencia(idnomina, dia1, dia2, dia3, dia4, dia5, dia6, dia7);
      
       }
-  public void insertar_procedimiento_java( String id_empleado,String nominaGeneral,String total_indi, String dia1, String dia2, String dia3, String dia4, String dia5,
-             String dia6, String dia7){
-       NominaTotalProcedure(id_empleado, nominaGeneral, total_indi, dia1, dia2, dia3, dia4, dia5, dia6, dia7);
+  public void insertar_procedimiento_java(String id_empleado,String nominaGeneral,String total_indi, String dia1, String dia2, String dia3, String dia4, String dia5,
+             String dia6, String dia7,String produ,String velada,String viaje,String domingo,String vacaciones,String extra,String retardo,String otro_desc,String pantalon,String infonavit){
+       NominaTotalProcedure(id_empleado, nominaGeneral, total_indi, dia1, dia2, dia3, dia4, dia5, dia6, dia7, produ, velada, viaje, domingo, vacaciones, extra, retardo, otro_desc, pantalon, infonavit);
      
       }
   

@@ -42,7 +42,7 @@ public class Pn_Importar_Nomina extends javax.swing.JPanel {
 
     }
 
-    public void SumarTabla() {
+    public void SumarTabla(String v) {
         Produccion = 0.0;
         Velada = 0.0;
         viajes = 0.0;
@@ -73,13 +73,16 @@ public class Pn_Importar_Nomina extends javax.swing.JPanel {
             total += Double.parseDouble(tNomina.getValueAt(i, 20).toString());
 
         }
+if(v=="J"){
+    
 
         JOptionPane.showMessageDialog(null, "TOTAL DE EXTRAS " + "\n" + "Produccion: $" + "\t" + formato1.format(Produccion) + "\n"
                 + "Veladas:" + "\t" + " $" + formato1.format(Velada) + "\n" + "Viajes:" + "\t" + " $ " + formato1.format(viajes) + "\n" + "T. Extra:" + "\t" + "  $ " + formato1.format(T_extra) + "\n" + "Subtotal:" + "\t" + "  $ " + formato1.format(Total_sD) + "\n" + "\n"
                 + "DESCUENTOS" + "\n" + "Retardos:" + "\t" + " $ " + formato1.format(retardos) + "\n" + "Otros Descuentos:" + "\t" + " $ " + formato1.format(oDescuentos) + "\n" + "Pantalones:" + "\t" + " $ " + formato1.format(Pantalones) + "\n" + "Infonavit:" + "\t" + " $ "
                 + formato1.format(Infonavit) + "\n" + "\n" + "\n" + "TOTAL:" + "\t" + " $" + formato1.format(total), "TOTAL DE PAGOS", JOptionPane.INFORMATION_MESSAGE
         );
-    }
+}
+}
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
@@ -589,17 +592,21 @@ public class Pn_Importar_Nomina extends javax.swing.JPanel {
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addGap(19, 19, 19)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(txtnomina, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(jLabel1)
-                        .addComponent(jLabel2))
-                    .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                        .addComponent(jLabel3)
-                        .addComponent(jdatadesde, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(jdatahasta, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                .addComponent(txtnomina, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(jLabel1)
+                                .addComponent(jLabel2))
+                            .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                .addComponent(jLabel3)
+                                .addComponent(jdatadesde, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(jdatahasta, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(14, 14, 14))
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel2Layout.createSequentialGroup()
+                        .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)))
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 390, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -613,11 +620,12 @@ public class Pn_Importar_Nomina extends javax.swing.JPanel {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
 
-        SumarTabla();
+        SumarTabla("J");
         // TODO add your handling code here:
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+SumarTabla("");
         int totalfilas = tNomina.getRowCount();
         semana = txtnomina.getText();
         SimpleDateFormat formatoFecha = new SimpleDateFormat("YYYY-MM-dd");
@@ -659,7 +667,8 @@ public class Pn_Importar_Nomina extends javax.swing.JPanel {
             total_empleado = tNomina.getValueAt(i, 20).toString();
 
            
-            INC.insertar_procedimiento_java(id_empleado, String.valueOf(id_nomina), total_empleado, dia1, dia2, dia3, dia4, dia5, dia6, dia6);
+            INC.insertar_procedimiento_java(id_empleado, String.valueOf(id_nomina), total_empleado, dia1, dia2, dia3, dia4, dia5, dia6, dia6,Produccions,
+            Veladas,viajess,domingos,vacacioness,T_extras,retardoss,oDescuentoss,Pantaloness,Infonavits);
             
 //            INC.Inserta_extra_individual(String.valueOf(id_nomina_individual), Double.parseDouble(Produccions), "PRODUCCION");
 //            INC.Inserta_extra_individual(String.valueOf(id_nomina_individual), Double.parseDouble(Veladas), "VELADA");
